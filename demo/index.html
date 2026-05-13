@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reusable components — Table</title>
+  <link rel="stylesheet" href="styles/table-variables.css">
+  <link rel="stylesheet" href="../table/styles/table.css">
+  <link rel="stylesheet" href="styles/demo.css">
+</head>
+<body>
+  <div class="theme-bar" role="group" aria-label="Color theme">
+    <span>Theme</span>
+    <button type="button" id="theme-auto" aria-pressed="true">Browser default</button>
+    <button type="button" id="theme-light" aria-pressed="false">Light</button>
+    <button type="button" id="theme-dark" aria-pressed="false">Dark</button>
+  </div>
+
+  <h1>Table component</h1>
+  <p class="intro">
+    Demos of the <code>Table</code> component.
+  </p>
+
+  <section aria-labelledby="heading-ledger">
+    <h2 id="heading-ledger">Minimal table</h2>
+    <p class="intro">
+      A simple table displaying basic object data with no searching or filtering.
+    </p>
+    <div id="app-ledger"></div>
+  </section>
+
+  <section aria-labelledby="heading-search">
+    <h2 id="heading-search">Complex table</h2>
+    <p class="intro">
+      A table demonstrating more complex features:
+      <ul>
+        <li>Text search against <code>searchable: true</code> columns (SKU, category, status).</li>
+        <li>A custom field name so column headers can be customized separately from data property names.</li>
+        <li>Custom value, render and sort functions for the 'status' column to allow it to be driven by the 'quantity' column.</li>
+        <li>A custom filter UI element and function to allow filtering by status.</li>
+        <li>Action buttons to modify properties of each row to see re-rendering (including sorting and filtering).</li>
+        <li>A custom row click handler which logs data to the browser console.</li>
+        <li><code>defaultSort</code> so the table opens sorted by computed status.</li>
+      </ul>
+    </p>
+    <div class="demo-toolbar">
+      <button type="button" id="btn-restore">Restore sample data</button>
+      <button type="button" id="btn-clear">Clear table</button>
+    </div>
+    <div id="app-search"></div>
+  </section>
+
+  <section aria-labelledby="heading-mutable">
+    <h2 id="heading-mutable">Mutable tables</h2>
+    <p class="intro">
+      With <code>mutableData: false</code> (default), each row is shallow-cloned into the table's internal array.
+      With <code>mutableData: true</code>, object references remain intact, so changes can affect the original data.
+    </p>
+    <p class="intro">
+      Below is a live <code>JSON.stringify</code> of data passed into two Table components. Only the mutableData: true table should change when the "+1" button is clicked.
+    </p>
+    <div class="mutable-demo-grid">
+      <div class="mutable-demo-panel">
+        <h3><code>mutableData: false</code> — cloned row objects</h3>
+        <pre class="mutable-json" id="json-mutable-false" aria-live="polite"></pre>
+        <div id="app-mutable-false"></div>
+      </div>
+      <div class="mutable-demo-panel">
+        <h3><code>mutableData: true</code> — same row objects</h3>
+        <pre class="mutable-json" id="json-mutable-true" aria-live="polite"></pre>
+        <div id="app-mutable-true"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../table/table.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+html {
+  color-scheme: light dark;
+}
+html[data-theme=light] {
+  color-scheme: light;
+}
+html[data-theme=dark] {
+  color-scheme: dark;
+}
+html[data-theme=dark] body {
+  background: #121212;
+  color: #eee;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-theme=auto] body {
+    background: #121212;
+    color: #eee;
+  }
+}
+@media (prefers-color-scheme: light) {
+  html[data-theme=auto] body {
+    background: #fafafa;
+    color: #1a1a1a;
+  }
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin: 0;
+  padding: 24px;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 32px 0 12px;
+}
+
+.intro {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+
+.theme-bar,
+.demo-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.theme-bar button,
+.demo-toolbar button {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a1a;
+}
+.theme-bar button:hover,
+.demo-toolbar button:hover {
+  background: #f0f0f0;
+}
+
+.theme-bar {
+  margin: 20px 0;
+}
+.theme-bar button[aria-pressed=true] {
+  border-color: #1a6cbb;
+  box-shadow: 0 0 0 1px #1a6cbb;
+}
+
+.demo-toolbar {
+  margin-bottom: 16px;
+}
+
+.demo-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #eee;
+  color: #333;
+}
+.demo-badge--ok {
+  background: #d4edda;
+  color: #155724;
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.demo-action {
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a1a;
+}
+.demo-action:hover {
+  background: #f0f0f0;
+}
+.demo-action--primary {
+  border-color: #1a6cbb;
+  color: #1a6cbb;
+}
+
+section,
+.theme-bar,
+.intro {
+  max-width: 56rem;
+}
+
+.demo-inline-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.demo-inline-filter select {
+  font: inherit;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.mutable-demo-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 700px) {
+  .mutable-demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mutable-demo-panel h3 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.mutable-json {
+  margin: 0 0 12px;
+  padding: 12px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  overflow: auto;
+  max-height: 14rem;
+  border-radius: 6px;
+  border: 1px solid var(--mutable-json-border, #e4e4e7);
+}

@@ -1,0 +1,3 @@
+# Dart Sass always emits LF on every OS. Pin text EOL so Windows/Git does not
+# treat compiled CSS as mixed or suggest CRLF rewrites.
+*.css text eol=lf

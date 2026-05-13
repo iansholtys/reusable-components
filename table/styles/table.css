@@ -1,0 +1,149 @@
+.table-component .table-filter,
+.table-component .table-container,
+.table-component .table-empty-state {
+  border: 1px solid var(--table-border);
+  border-radius: var(--table-radius);
+  background: var(--table-card-bg);
+}
+.table-component .table-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--table-filter-gap);
+  margin-bottom: var(--table-filter-margin-bottom);
+  padding: var(--table-filter-padding);
+}
+.table-component .filter-left {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.table-component .filter-right {
+  display: flex;
+  align-items: center;
+  gap: var(--table-filter-gap);
+  flex: 0 1 auto;
+}
+.table-component .table-row-count {
+  font-size: var(--table-row-count-font-size);
+  color: var(--table-text-muted);
+  white-space: nowrap;
+}
+.table-component .search-container {
+  position: relative;
+}
+.table-component .search-input {
+  font-size: var(--table-search-font-size);
+  width: var(--table-search-width);
+  max-width: 100%;
+  padding: var(--table-search-padding);
+  border: 1px solid var(--table-border);
+  border-radius: var(--table-search-radius);
+  background: var(--table-card-bg);
+  color: var(--table-text);
+}
+.table-component .search-input::placeholder {
+  color: var(--table-text-muted);
+}
+.table-component .search-container .btn-search-clear {
+  position: absolute;
+  right: var(--table-search-clear-offset);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--table-search-clear-font-size);
+  padding: var(--table-search-clear-padding);
+  border-radius: 50%;
+  width: var(--table-search-clear-size);
+  height: var(--table-search-clear-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--table-text-muted);
+  transition: background-color 0.2s, color 0.2s;
+  line-height: 1;
+  box-shadow: none;
+}
+.table-component .search-container .btn-search-clear:hover {
+  background: var(--table-hover);
+  color: var(--table-text);
+}
+.table-component .table-empty-state {
+  text-align: center;
+  padding: var(--table-empty-padding);
+}
+.table-component .table-empty-state .big-icon {
+  font-size: var(--table-empty-icon-font-size);
+  margin-bottom: var(--table-empty-icon-margin-bottom);
+  opacity: 0.6;
+}
+.table-component .table-empty-state h4 {
+  margin: var(--table-empty-title-margin);
+  color: var(--table-text);
+}
+.table-component .table-empty-state p {
+  margin: 0;
+  opacity: 0.8;
+  color: var(--table-text-muted);
+}
+.table-component .table-empty-state > :last-child {
+  margin-bottom: 0;
+}
+.table-component .table-container {
+  overflow: hidden;
+}
+.table-component table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+  color: var(--table-text);
+}
+.table-component table.data-table tr {
+  border-bottom: 1px solid var(--table-border);
+}
+.table-component table.data-table thead tr {
+  background: var(--table-bg-header);
+}
+.table-component table.data-table th,
+.table-component table.data-table td {
+  padding: var(--table-cell-padding);
+  text-align: left;
+}
+.table-component table.data-table th {
+  font-weight: 600;
+}
+.table-component table.data-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+.table-component table.data-table th.sortable:hover {
+  background: var(--table-hover-header);
+}
+.table-component table.data-table th.sortable .sort-icon {
+  margin-left: var(--table-sort-icon-margin-left);
+  font-size: var(--table-sort-icon-font-size);
+  opacity: 0.6;
+}
+.table-component table.data-table td {
+  vertical-align: middle;
+}
+.table-component table.data-table tbody tr:last-of-type {
+  border-bottom: none;
+}
+.table-component table.data-table tbody tr:hover {
+  background: var(--table-hover);
+}
+
+@media (max-width: 768px) {
+  .table-component table.data-table {
+    font-size: var(--table-font-size-sm);
+  }
+}
+
+/*# sourceMappingURL=table.css.map */

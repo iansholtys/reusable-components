@@ -1,0 +1,179 @@
+// Table component. Load default variables from _table-variables.scss.
+
+.table-component {
+  .table-filter,
+  .table-container,
+  .table-empty-state {
+    border: 1px solid var(--table-border);
+    border-radius: var(--table-radius);
+    background: var(--table-card-bg);
+  }
+
+  .table-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--table-filter-gap);
+    margin-bottom: var(--table-filter-margin-bottom);
+    padding: var(--table-filter-padding);
+  }
+
+  .filter-left {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .filter-right {
+    display: flex;
+    align-items: center;
+    gap: var(--table-filter-gap);
+    flex: 0 1 auto;
+  }
+
+  .table-row-count {
+    font-size: var(--table-row-count-font-size);
+    color: var(--table-text-muted);
+    white-space: nowrap;
+  }
+
+  .search-container {
+    position: relative;
+  }
+
+  .search-input {
+    font-size: var(--table-search-font-size);
+    width: var(--table-search-width);
+    max-width: 100%;
+    padding: var(--table-search-padding);
+    border: 1px solid var(--table-border);
+    border-radius: var(--table-search-radius);
+    background: var(--table-card-bg);
+    color: var(--table-text);
+
+    &::placeholder {
+      color: var(--table-text-muted);
+    }
+  }
+
+  .search-container .btn-search-clear {
+    position: absolute;
+    right: var(--table-search-clear-offset);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--table-search-clear-font-size);
+    padding: var(--table-search-clear-padding);
+    border-radius: 50%;
+    width: var(--table-search-clear-size);
+    height: var(--table-search-clear-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--table-text-muted);
+    transition: background-color 0.2s, color 0.2s;
+    line-height: 1;
+    box-shadow: none;
+
+    &:hover {
+      background: var(--table-hover);
+      color: var(--table-text);
+    }
+  }
+
+  .table-empty-state {
+    text-align: center;
+    padding: var(--table-empty-padding);
+
+    .big-icon {
+      font-size: var(--table-empty-icon-font-size);
+      margin-bottom: var(--table-empty-icon-margin-bottom);
+      opacity: 0.6;
+    }
+
+    h4 {
+      margin: var(--table-empty-title-margin);
+      color: var(--table-text);
+    }
+
+    p {
+      margin: 0;
+      opacity: 0.8;
+      color: var(--table-text-muted);
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .table-container {
+    overflow: hidden;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--table-font-size);
+    color: var(--table-text);
+
+    tr {
+      border-bottom: 1px solid var(--table-border);
+    }
+
+    thead tr {
+      background: var(--table-bg-header);
+    }
+
+    th,
+    td {
+      padding: var(--table-cell-padding);
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+
+      &.sortable {
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.2s ease;
+        white-space: nowrap;
+
+        &:hover {
+          background: var(--table-hover-header);
+        }
+
+        .sort-icon {
+          margin-left: var(--table-sort-icon-margin-left);
+          font-size: var(--table-sort-icon-font-size);
+          opacity: 0.6;
+        }
+      }
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: var(--table-hover);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .table-component table.data-table {
+    font-size: var(--table-font-size-sm);
+  }
+}

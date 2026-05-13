@@ -1,0 +1,70 @@
+// Default theme tokens for `.table-component`. Host apps can compile this file,
+// copy values into their own styles, or override variables on `.table-component`.
+
+.table-component {
+  // Data table and empty state
+  --table-border: #e5e5e5;
+  --table-card-bg: #fff;
+  --table-radius: 0.5rem;
+
+  // Shared table text
+  --table-text: #1a1a1a;
+  --table-text-muted: #666;
+
+  // Filter bar
+  --table-filter-gap: 1rem;
+  --table-filter-margin-bottom: 1rem;
+  --table-filter-padding: 1rem;
+
+  // Search input
+  --table-search-font-size: 0.9rem;
+  --table-search-width: 12.5rem;
+  --table-search-padding: 0.5rem 2rem 0.5rem 0.625rem;
+  --table-search-radius: 0.375rem;
+  --table-search-clear-offset: 0.5rem;
+  --table-search-clear-font-size: 0.875rem;
+  --table-search-clear-padding: 0.25rem;
+  --table-search-clear-size: 1.25rem;
+
+  // Empty state
+  --table-empty-padding: 2.5rem;
+  --table-empty-icon-font-size: 4rem;
+  --table-empty-icon-margin-bottom: 1rem;
+  --table-empty-title-margin: 0 0 0.5rem;
+
+  // Data table
+  --table-bg-header: #f5f5f5;
+  --table-hover: #f0f0f0;
+  --table-hover-header: #ebebeb;
+  --table-row-count-font-size: 0.85rem;
+  --table-font-size: 0.9rem;
+  --table-font-size-sm: 0.8rem;
+  --table-cell-padding: .75em .625em;
+  --table-cell-padding-sm: 0.5rem 0.25rem;
+  --table-cell-padding-xs: 0.375rem 0.1875rem;
+  --table-sort-icon-margin-left: 0.5rem;
+  --table-sort-icon-font-size: 0.75rem;
+}
+
+// Demo / host page can set html[data-theme="light" | "dark" | "auto"].
+html[data-theme="dark"] .table-component {
+  --table-border: #3d3d3d;
+  --table-bg-header: #2a2a2a;
+  --table-text: #f0f0f0;
+  --table-text-muted: #a0a0a0;
+  --table-hover: #333;
+  --table-hover-header: #363636;
+  --table-card-bg: #1e1e1e;
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="auto"] .table-component {
+    --table-border: #3d3d3d;
+    --table-bg-header: #2a2a2a;
+    --table-text: #f0f0f0;
+    --table-text-muted: #a0a0a0;
+    --table-hover: #333;
+    --table-hover-header: #363636;
+    --table-card-bg: #1e1e1e;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "reusable-components",
+  "private": true,
+  "scripts": {
+    "build:css": "node scripts/build-css.mjs",
+    "watch:css": "node scripts/watch-css.mjs"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}
