@@ -6,7 +6,7 @@ const demoPairs = getAllDemoSassPairs(repoRoot);
 
 if (mainPairs.length === 0 && demoPairs.length === 0) {
   console.warn(
-    'No `{name}/styles/{name}.scss`, `*-variables.scss`, or `demo/styles/demo.scss` found; nothing to compile.'
+    'No `{name}/styles/{name}.scss`, `*-vars.scss`, or `demo/styles/demo.scss` found; nothing to compile.'
   );
   process.exit(0);
 }

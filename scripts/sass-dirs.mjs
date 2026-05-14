@@ -29,7 +29,7 @@ export function getSassDirectoryPairs(repoRoot) {
 }
 
 /**
- * Each `*-variables.scss` (or partial `_*-variables.scss`) in `{name}/styles/`
+ * Each `*-vars.scss` (or partial `_*-vars.scss`) in `{name}/styles/`
  * → `demo/styles/<basename>.css` (leading `_` stripped from the basename).
  *
  * Variables sheets are partials so the main `{name}.scss` `--watch` graph does
@@ -47,7 +47,7 @@ export function getDemoVariablesSassPairs(repoRoot) {
     if (!existsSync(stylesDir) || !statSync(stylesDir).isDirectory()) continue;
 
     for (const f of readdirSync(stylesDir)) {
-      if (!f.endsWith('-variables.scss')) continue;
+      if (!f.endsWith('-vars.scss')) continue;
       const outBase = f.replace(/\.scss$/i, '').replace(/^_/, '');
       const outName = `${outBase}.css`;
       pairs.push(`${name}/styles/${f}:demo/styles/${outName}`);
