@@ -47,6 +47,12 @@ h2 {
   margin: 32px 0 12px;
 }
 
+.demo-subheading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 24px 0 8px;
+}
+
 .intro {
   margin: 0 0 16px;
   font-size: 0.95rem;

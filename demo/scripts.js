@@ -1,25 +1,59 @@
-(function () {
-  var root = document.documentElement;
+$(function () {
+  var $root = $(document.documentElement);
+  var themeModes = ['auto', 'light', 'dark'];
 
   function setTheme(mode) {
-    root.setAttribute('data-theme', mode);
-    ['theme-auto', 'theme-light', 'theme-dark'].forEach(function (id) {
-      var btn = document.getElementById(id);
-      var active = (mode === 'auto' && id === 'theme-auto') ||
-        (mode === 'light' && id === 'theme-light') ||
-        (mode === 'dark' && id === 'theme-dark');
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    $root.attr('data-theme', mode);
+    themeModes.forEach(function (themeMode) {
+      $('#theme-' + themeMode).attr('aria-pressed', mode === themeMode ? 'true' : 'false');
     });
   }
 
-  document.getElementById('theme-auto').addEventListener('click', function () {
-    setTheme('auto');
+  themeModes.forEach(function (mode) {
+    $('#theme-' + mode).on('click', function () {
+      setTheme(mode);
+    });
   });
-  document.getElementById('theme-light').addEventListener('click', function () {
-    setTheme('light');
+
+  $('#btn-modal-alert').on('click', function () {
+    AlertModal.show('Sample alert message for the demo.', 'Alert');
   });
-  document.getElementById('theme-dark').addEventListener('click', function () {
-    setTheme('dark');
+
+  $('#btn-modal-confirm').on('click', function () {
+    ConfirmModal.confirm('Proceed with this action?', 'Confirm').then(function (ok) {
+      if (ok) {
+        AlertModal.show('You chose OK.', 'Result');
+      }
+    });
+  });
+
+  var alertAnimationDemos = [
+    { label: 'Fade', enter: 'fade', exit: 'fade' },
+    { label: 'Slide up', enter: 'slide-up', exit: 'slide-up' },
+    { label: 'Slide down', enter: 'slide-down', exit: 'slide-down' },
+    { label: 'Slide left', enter: 'slide-left', exit: 'slide-left' },
+    { label: 'Slide right', enter: 'slide-right', exit: 'slide-right' },
+    { label: 'Scale up', enter: 'scale-up', exit: 'scale-up', scale: 0.9 },
+    { label: 'Scale down', enter: 'scale-down', exit: 'scale-down', scale: 1.1 }
+  ];
+
+  var $alertAnimToolbar = $('#alert-animation-toolbar');
+  alertAnimationDemos.forEach(function (demo) {
+    $('<button>', { type: 'button', text: demo.label })
+      .on('click', function () {
+        var enter = { preset: demo.enter, duration: 300 };
+        var exit = { preset: demo.exit, duration: 300 };
+        if (demo.scale != null) {
+          enter.scale = demo.scale;
+          exit.scale = demo.scale;
+        }
+        AlertModal.show(
+          'Enter: ' + demo.enter + ' · Exit: ' + demo.exit,
+          demo.label,
+          { enterAnimation: enter, exitAnimation: exit }
+        );
+      })
+      .appendTo($alertAnimToolbar);
   });
 
   var tableLedger = new Table({
@@ -158,7 +192,7 @@
   });
 
   var hostFrozen = [{ label: 'One row', count: 0 }];
-  var jsonMutableFalse = document.getElementById('json-mutable-false');
+  var $jsonMutableFalse = $('#json-mutable-false');
   var tableFrozen = new Table({
     id: 'demo-mutable-false',
     columns: [
@@ -187,14 +221,14 @@
   });
 
   function syncMutableJsonFalse() {
-    jsonMutableFalse.textContent = JSON.stringify(hostFrozen, null, 2);
+    $jsonMutableFalse.text(JSON.stringify(hostFrozen, null, 2));
   }
 
   $('#app-mutable-false').append(tableFrozen.init());
   syncMutableJsonFalse();
 
   var hostLive = [{ label: 'One row', count: 0 }];
-  var jsonMutableTrue = document.getElementById('json-mutable-true');
+  var $jsonMutableTrue = $('#json-mutable-true');
   var tableLive = new Table({
     id: 'demo-mutable-true',
     mutableData: true,
@@ -224,9 +258,9 @@
   });
 
   function syncMutableJsonTrue() {
-    jsonMutableTrue.textContent = JSON.stringify(hostLive, null, 2);
+    $jsonMutableTrue.text(JSON.stringify(hostLive, null, 2));
   }
 
   $('#app-mutable-true').append(tableLive.init());
   syncMutableJsonTrue();
-})();
+});

@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reusable components — Table</title>
+  <title>Reusable components</title>
   <link rel="stylesheet" href="styles/table-vars.css">
   <link rel="stylesheet" href="../table/styles/table.css">
+  <link rel="stylesheet" href="styles/modal-vars.css">
+  <link rel="stylesheet" href="../modal/styles/modal.css">
   <link rel="stylesheet" href="styles/demo.css">
 </head>
 <body>
@@ -16,7 +18,27 @@
     <button type="button" id="theme-dark" aria-pressed="false">Dark</button>
   </div>
 
-  <h1>Table component</h1>
+  <h1>Reusable components</h1>
+
+  <section aria-labelledby="heading-modals">
+    <h2 id="heading-modals">Modal component</h2>
+    <p class="intro">
+      Alert and confirm dialogs share one backdrop while open. Default motion: instant enter, slide-up exit.
+    </p>
+    <div class="demo-toolbar">
+      <button type="button" id="btn-modal-alert">Show alert</button>
+      <button type="button" id="btn-modal-confirm">Show confirm</button>
+    </div>
+
+    <h3 class="demo-subheading">Alert enter / exit presets</h3>
+    <p class="intro">
+      Each button uses the same preset for open and close (300ms). Dismiss the alert to see the exit animation.
+      The default alert above uses instant enter and slide-up exit only.
+    </p>
+    <div class="demo-toolbar" id="alert-animation-toolbar"></div>
+  </section>
+
+  <h2 id="heading-tables">Table component</h2>
   <p class="intro">
     Demos of the <code>Table</code> component.
   </p>
@@ -74,6 +96,9 @@
   </section>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../modal/modal.js"></script>
+  <script src="../modal/alertModal.js"></script>
+  <script src="../modal/confirmModal.js"></script>
   <script src="../table/table.js"></script>
   <script src="scripts.js"></script>
 </body>
