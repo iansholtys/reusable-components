@@ -1,4 +1,4 @@
-@import 'modal-vars';
+// Modal component. Load theme variables from _modal-vars.scss.
 
 // Transform presets: enter = from-state before .show, exit = to-state while .is-exiting
 $modal-slide-presets: (
