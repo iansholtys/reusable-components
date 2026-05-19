@@ -7,7 +7,7 @@
   backdrop-filter: blur(5px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--modal-backdrop-duration, 0.3s) ease;
+  transition: opacity var(--modal-backdrop-duration) ease;
 }
 .modal-backdrop.show {
   opacity: 1;
@@ -39,59 +39,59 @@
   background-color: var(--modal-bg);
   box-shadow: var(--modal-shadow);
   pointer-events: auto;
-  transition: transform var(--modal-enter-duration, 0.3s) ease, opacity var(--modal-enter-duration, 0.3s) ease;
+  transition: transform var(--modal-enter-duration) ease, opacity var(--modal-enter-duration) ease;
 }
 .modal-content.is-exiting {
-  transition: transform var(--modal-exit-duration, 0.3s) ease, opacity var(--modal-exit-duration, 0.3s) ease;
+  transition: transform var(--modal-exit-duration) ease, opacity var(--modal-exit-duration) ease;
 }
 
 .modal-layer:not(.show) .modal-content[data-enter]:not([data-enter=none]) {
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content[data-enter=slide-up] {
-  transform: translateY(var(--modal-enter-distance, 20px));
+  transform: translateY(var(--modal-enter-distance));
 }
 .modal-layer:not(.show) .modal-content[data-enter=slide-down] {
-  transform: translateY(calc(-1 * var(--modal-enter-distance, 20px)));
+  transform: translateY(calc(-1 * var(--modal-enter-distance)));
 }
 .modal-layer:not(.show) .modal-content[data-enter=slide-left] {
-  transform: translateX(var(--modal-enter-distance, 20px));
+  transform: translateX(var(--modal-enter-distance));
 }
 .modal-layer:not(.show) .modal-content[data-enter=slide-right] {
-  transform: translateX(calc(-1 * var(--modal-enter-distance, 20px)));
+  transform: translateX(calc(-1 * var(--modal-enter-distance)));
 }
 .modal-layer:not(.show) .modal-content[data-enter=scale-up] {
-  transform: scale(var(--modal-enter-scale, 0.92));
+  transform: scale(var(--modal-enter-scale));
 }
 .modal-layer:not(.show) .modal-content[data-enter=scale-down] {
-  transform: scale(var(--modal-enter-scale, 1.08));
+  transform: scale(var(--modal-exit-scale));
 }
 
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=fade] {
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=slide-up] {
-  transform: translateY(calc(-1 * var(--modal-exit-distance, 20px)));
+  transform: translateY(calc(-1 * var(--modal-exit-distance)));
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=slide-down] {
-  transform: translateY(var(--modal-exit-distance, 20px));
+  transform: translateY(var(--modal-exit-distance));
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=slide-left] {
-  transform: translateX(calc(-1 * var(--modal-exit-distance, 20px)));
+  transform: translateX(calc(-1 * var(--modal-exit-distance)));
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=slide-right] {
-  transform: translateX(var(--modal-exit-distance, 20px));
+  transform: translateX(var(--modal-exit-distance));
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=scale-up] {
-  transform: scale(var(--modal-exit-scale, 1.08));
+  transform: scale(var(--modal-exit-scale));
   opacity: 0;
 }
 .modal-layer:not(.show) .modal-content.is-exiting[data-exit=scale-down] {
-  transform: scale(var(--modal-exit-scale, 0.92));
+  transform: scale(var(--modal-enter-scale));
   opacity: 0;
 }
 

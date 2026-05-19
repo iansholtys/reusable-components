@@ -6,9 +6,9 @@
 .modal-layer {
   --modal-bg: #fff;
   --modal-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --modal-text: #1a1a1a;
   --modal-header-border: #e1e5e9;
   --modal-header-bg: #f8f9fa;
-  --modal-text: #1a1a1a;
   --modal-close: #6c757d;
   --modal-close-hover: #343a40;
   --modal-btn-primary-bg: #1a6cbb;
@@ -16,6 +16,12 @@
   --modal-btn-secondary-bg: #fff;
   --modal-btn-secondary-text: #1a1a1a;
   --modal-btn-secondary-border: #ccc;
+  --modal-enter-duration: 0.3s;
+  --modal-exit-duration: 0.3s;
+  --modal-enter-distance: 20px;
+  --modal-exit-distance: 20px;
+  --modal-enter-scale: 0.92;
+  --modal-exit-scale: 1.08;
 }
 
 html[data-theme=dark] .modal-backdrop {
