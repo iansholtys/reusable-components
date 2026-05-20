@@ -142,15 +142,12 @@ class Modal {
       'aria-label': 'Close'
     });
 
-    // Create modal body
-    const $modalBody = $('<div>', {
-      class: 'modal-body',
-      html: this.getContent()
-    });
+    this.elements.$body = $('<div>', { class: 'modal-body' });
+    this.fillBody(this.getContent());
 
     // Assemble the modal structure
     $modalHeader.append($modalTitle, $closeButton);
-    this.elements.$content.append($modalHeader, $modalBody);
+    this.elements.$content.append($modalHeader, this.elements.$body);
     this.elements.$root.append(this.elements.$content);
 
     // Append to body
@@ -178,6 +175,22 @@ class Modal {
    */
   getContent() {
     return '';
+  }
+
+  /**
+   * @param {string|JQuery} content
+   */
+  fillBody(content) {
+    if (!this.elements.$body?.length) {
+      return;
+    }
+
+    this.elements.$body.empty();
+    if (content && typeof content === 'object' && content.jquery) {
+      this.elements.$body.append(content);
+      return;
+    }
+    this.elements.$body.html(content || '');
   }
 
   /**
@@ -313,7 +326,7 @@ class Modal {
    */
   setContent(content) {
     if (this.domExists) {
-      this.elements.$root.find('.modal-body').html(content);
+      this.fillBody(content);
     }
   }
 
