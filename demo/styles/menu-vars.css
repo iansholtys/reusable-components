@@ -10,13 +10,13 @@
   --menu-item-hover-bg: #f0f0f0;
   --menu-item-active-bg: #e4e4e4;
   --menu-list-min-width: 10rem;
-  --menu-trigger-size: 2rem;
-  --menu-trigger-font-size: 1.25rem;
-  --menu-trigger-label-font-size: 0.875rem;
-  --menu-trigger-label-padding: 0.375rem 0.75rem;
-  --menu-trigger-bg: #fff;
-  --menu-trigger-border: #e5e5e5;
-  --menu-trigger-hover-bg: #f5f5f5;
+  --menu-button-size: 2rem;
+  --menu-button-font-size: 1.25rem;
+  --menu-button-label-font-size: 0.875rem;
+  --menu-button-label-padding: 0.375rem 0.75rem;
+  --menu-button-bg: #fff;
+  --menu-button-border: #e5e5e5;
+  --menu-button-hover-bg: #f5f5f5;
   --menu-z-index: 20;
   --menu-offset: 5px;
 }
@@ -28,9 +28,9 @@ html[data-theme=dark] .menu-component {
   --menu-text-muted: #a0a0a0;
   --menu-item-hover-bg: #333;
   --menu-item-active-bg: #3d3d3d;
-  --menu-trigger-bg: #1e1e1e;
-  --menu-trigger-border: #3d3d3d;
-  --menu-trigger-hover-bg: #2a2a2a;
+  --menu-button-bg: #1e1e1e;
+  --menu-button-border: #3d3d3d;
+  --menu-button-hover-bg: #2a2a2a;
   --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
@@ -42,9 +42,9 @@ html[data-theme=dark] .menu-component {
     --menu-text-muted: #a0a0a0;
     --menu-item-hover-bg: #333;
     --menu-item-active-bg: #3d3d3d;
-    --menu-trigger-bg: #1e1e1e;
-    --menu-trigger-border: #3d3d3d;
-    --menu-trigger-hover-bg: #2a2a2a;
+    --menu-button-bg: #1e1e1e;
+    --menu-button-border: #3d3d3d;
+    --menu-button-hover-bg: #2a2a2a;
     --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
   }
 }

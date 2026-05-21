@@ -85,21 +85,21 @@ class Menu {
     });
 
     if (this.isToggle) {
-      const triggerClasses = ['menu-trigger'];
+      const buttonClasses = ['menu-button'];
       if (this.hasCustomButtonLabel) {
-        triggerClasses.push('menu-trigger--labeled');
+        buttonClasses.push('menu-button--labeled');
       }
-      this.elements.$trigger = $('<button>', {
+      this.elements.$button = $('<button>', {
         type: 'button',
-        class: triggerClasses.join(' '),
+        class: buttonClasses.join(' '),
         'aria-haspopup': 'true',
         'aria-expanded': 'false',
         'aria-controls': this.id + '-list'
       });
       if (this.buttonLabel !== '') {
-        this.elements.$trigger.html(this.buttonLabel);
+        this.elements.$button.html(this.buttonLabel);
       }
-      this.elements.$root.append(this.elements.$trigger);
+      this.elements.$root.append(this.elements.$button);
     }
 
     this.elements.$list = $('<ul>', {
@@ -154,8 +154,8 @@ class Menu {
     this.cancelScheduledClose();
     this.isOpen = true;
     this.elements.$root.addClass('is-open');
-    if (this.elements.$trigger) {
-      this.elements.$trigger.attr('aria-expanded', 'true');
+    if (this.elements.$button) {
+      this.elements.$button.attr('aria-expanded', 'true');
     }
   }
 
@@ -170,8 +170,8 @@ class Menu {
     this.isOpen = false;
     this.unpin();
     this.elements.$root.removeClass('is-open');
-    if (this.elements.$trigger) {
-      this.elements.$trigger.attr('aria-expanded', 'false');
+    if (this.elements.$button) {
+      this.elements.$button.attr('aria-expanded', 'false');
     }
   }
 
@@ -216,7 +216,7 @@ class Menu {
       return;
     }
 
-    const { $root, $trigger } = this.elements;
+    const { $root, $button } = this.elements;
 
     $root.on('mouseenter', () => this.open());
 
@@ -226,7 +226,7 @@ class Menu {
       }
     });
 
-    $trigger.on('click', (e) => {
+    $button.on('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
 
