@@ -42,7 +42,6 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    min-width: var(--menu-list-min-width);
     border: 1px solid var(--menu-border);
     border-radius: var(--menu-radius);
     background-color: var(--menu-bg);
@@ -51,7 +50,6 @@
 
   .menu-item {
     display: block;
-    width: 100%;
     box-sizing: border-box;
     padding: var(--menu-item-padding);
     font-size: var(--menu-item-font-size);
@@ -60,7 +58,9 @@
     border-radius: 0;
     background-color: transparent;
     color: var(--menu-text);
-  
+    text-wrap: var(--menu-item-text-wrap);
+    white-space: var(--menu-item-text-wrap);
+
     &:hover,
     &:focus-visible {
       background-color: var(--menu-item-hover-bg);
@@ -71,83 +71,145 @@
       background-color: var(--menu-item-active-bg);
     }
   }
-}
 
-.menu-component--toggle {
-  .menu-list {
+  // Invisible hover bridge across the offset gap (margin would break mouseenter).
+  &--direction-below::after,
+  &--direction-above::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--menu-offset);
+  }
+  &--direction-below::after {
+    top: 100%;
+  }
+  &--direction-above::before {
+    bottom: 100%;
+  }
+  &--direction-right::after,
+  &--direction-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--menu-offset);
+  }
+  &--direction-right::after {
+    left: 100%;
+  }
+  &--direction-left::before {
+    right: 100%;
+  }
+
+  &--vertical .menu-list {
+    min-width: var(--menu-list-min-width);
+  }
+  &--horizontal .menu-list {
+    display: flex;
+    flex-direction: row;
+    min-width: auto;
+    width: max-content;
+  }
+
+  &--toggle .menu-list {
     position: absolute;
     z-index: var(--menu-z-index);
     box-shadow: var(--menu-shadow);
   }
-}
 
-// Invisible hover bridge across the offset gap (margin would break mouseenter).
-.menu-component--placement-top::after,
-.menu-component--placement-bottom::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--menu-offset);
-}
-
-.menu-component--placement-top::after {
-  top: 100%;
-}
-
-.menu-component--placement-bottom::before {
-  bottom: 100%;
-}
-
-.menu-list {
-  .menu-component--placement-top & {
+  &--direction-below .menu-list {
     top: calc(100% + var(--menu-offset));
     bottom: auto;
     margin: 0;
   }
-  .menu-component--placement-bottom & {
+  &--direction-above .menu-list {
     top: auto;
     bottom: calc(100% + var(--menu-offset));
     margin: 0;
   }
-
-  .menu-component--align-left & {
-    left: 0;
+  &--direction-right .menu-list {
+    left: calc(100% + var(--menu-offset));
     right: auto;
-    transform: none;
+    margin: 0;
   }
-  .menu-component--align-right & {
+  &--direction-left .menu-list {
     left: auto;
-    right: 0;
-    transform: none;
-  }
-  .menu-component--align-center & {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    right: calc(100% + var(--menu-offset));
+    margin: 0;
   }
 
-  .menu-component--always-open & {
+  &--direction-below, &--direction-above {
+    &.menu-component--align-left .menu-list {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    &.menu-component--align-right .menu-list {
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+    &.menu-component--align-center .menu-list {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+  &--direction-right, &--direction-left {
+    &.menu-component--align-top .menu-list {
+      top: 0;
+      bottom: auto;
+      transform: none;
+    }
+    &.menu-component--align-bottom .menu-list {
+      top: auto;
+      bottom: 0;
+      transform: none;
+    }
+    &.menu-component--align-center .menu-list {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+    }
+  }
+
+  &--always-open .menu-list {
     position: static;
     box-shadow: none;
     display: block;
   }
-  .menu-component--toggle:not(.is-open) & {
+  &--always-open.menu-component--horizontal .menu-list,
+  &--toggle.is-open.menu-component--horizontal .menu-list {
+    display: flex;
+  }
+  &--toggle:not(.is-open) .menu-list {
     display: none;
   }
-  .menu-component--toggle.is-open & {
+  &--toggle.is-open .menu-list {
     display: block;
   }
-}
 
-.menu-item {
-  .menu-component--text-left & {
+  &--horizontal {
+    .menu-item {
+      width: auto;
+    }
+    .menu-list > li:not(:last-child) .menu-item {
+      border-right: 1px solid var(--menu-border);
+    }
+  }
+  &--vertical .menu-item {
+    width: 100%;
+  }
+
+  &--text-left .menu-item {
     text-align: left;
   }
-  .menu-component--text-center & {
+  &--text-center .menu-item {
     text-align: center;
   }
-  .menu-component--text-right & {
+  &--text-right .menu-item {
     text-align: right;
   }
 }

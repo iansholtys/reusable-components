@@ -25,28 +25,62 @@
   <section aria-labelledby="heading-menus">
     <h2 id="heading-menus">Menu component</h2>
     <p class="intro">
-      Vertical menus. <code>behavior.open: 'always'</code> keeps the list visible, <code>'toggle'</code> opens on hover and can be pinned open by clicking the button.
+      Menus default to vertical layout; pass <code>orientation: 'horizontal'</code> for a row of items.
+      <code>behavior.open: 'always'</code> keeps the list visible, <code>'toggle'</code> opens on hover and can be pinned open by clicking the button.
     </p>
 
     <h3 class="demo-subheading">Always open</h3>
-    <p class="intro">No menu button — the list is always shown.</p>
+    <p class="intro">Menus can be configured to always be open.</p>
     <div id="app-menu-always"></div>
+    <div id="app-menu-always-horizontal"></div>
 
-    <h3 class="demo-subheading">Toggle (hover + click)</h3>
+    <h3 class="demo-subheading">Direction and alignment</h3>
     <p class="intro">
-      Click the button to pin the menu open; click again unpins and closes.
-      Hovering over the button or panel holds it open until <code>closeDelay</code> ms after leaving.
+      Toggleable menus can be configured to have different directions and alignments:
     </p>
-    <div id="app-menu-toggle"></div>
-
-    <h3 class="demo-subheading">Alignment presets</h3>
-    <p class="intro">
-      Menus can be aligned with the left, center, or right of the button.
-    </p>
-    <div class="menu-alignment-demo">
-      <div id="app-menu-align-left"></div>
-      <div id="app-menu-align-center"></div>
-      <div id="app-menu-align-right"></div>
+    <ul>
+      <li><strong>Direction</strong> controls where the menu opens relative to the button.</li>
+      <li><strong>Alignment</strong> controls the alignment of the menu on the axis perpendicular to the direction.</li>
+    </ul>
+    <div class="menu-playground-controls" role="group" aria-label="Menu placement options">
+      <label class="menu-playground-control">
+        <span>Type</span>
+        <select id="menu-playground-type">
+          <option value="vertical" selected>Vertical</option>
+          <option value="horizontal">Horizontal</option>
+        </select>
+      </label>
+      <label class="menu-playground-control">
+        <span>Direction</span>
+        <select id="menu-playground-direction">
+          <option value="default" selected>Default</option>
+          <option value="above">Above</option>
+          <option value="below">Below</option>
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+        </select>
+      </label>
+      <label class="menu-playground-control">
+        <span>Alignment</span>
+        <select id="menu-playground-alignment">
+          <option value="default" selected>Default</option>
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+        </select>
+      </label>
+    </div>
+    <div class="menu-placement-arena" id="menu-placement-arena" aria-label="Menu placement preview">
+      <div class="menu-placement-slot menu-placement-slot--top-left" data-slot="top-left"></div>
+      <div class="menu-placement-slot menu-placement-slot--top-center" data-slot="top-center"></div>
+      <div class="menu-placement-slot menu-placement-slot--top-right" data-slot="top-right"></div>
+      <div class="menu-placement-slot menu-placement-slot--middle-left" data-slot="middle-left"></div>
+      <div class="menu-placement-slot menu-placement-slot--middle-right" data-slot="middle-right"></div>
+      <div class="menu-placement-slot menu-placement-slot--bottom-left" data-slot="bottom-left"></div>
+      <div class="menu-placement-slot menu-placement-slot--bottom-center" data-slot="bottom-center"></div>
+      <div class="menu-placement-slot menu-placement-slot--bottom-right" data-slot="bottom-right"></div>
     </div>
   </section>
 

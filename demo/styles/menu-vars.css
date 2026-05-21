@@ -9,7 +9,8 @@
   --menu-item-font-size: 0.9rem;
   --menu-item-hover-bg: #f0f0f0;
   --menu-item-active-bg: #e4e4e4;
-  --menu-list-min-width: 10rem;
+  --menu-list-min-width: 0;
+  --menu-item-text-wrap: nowrap;
   --menu-button-size: 2rem;
   --menu-button-font-size: 1.25rem;
   --menu-button-label-font-size: 0.875rem;

@@ -274,23 +274,87 @@ $(function () {
   });
   $('#app-menu-always').append(menuAlways.init());
 
-  var menuToggle = new Menu({
-    behavior: { closeDelay: 400 },
+  var menuAlwaysHorizontal = new Menu({
+    orientation: 'horizontal',
+    behavior: { open: 'always' },
     items: menuDemoItems
   });
-  $('#app-menu-toggle').append(menuToggle.init());
+  $('#app-menu-always-horizontal').append(menuAlwaysHorizontal.init());
 
-  [
-    { preset: 'top-left', buttonLabel: 'Left Aligned', mount: '#app-menu-align-left' },
-    { preset: 'top-center', buttonLabel: 'Center Aligned', mount: '#app-menu-align-center' },
-    { preset: 'top-right', buttonLabel: 'Right Aligned', mount: '#app-menu-align-right' }
-  ].forEach(function ({ preset, buttonLabel, mount }) {
-    var menu = new Menu({
-      preset,
-      buttonLabel,
+  var menuPlaygroundSlots = [
+    { id: 'top-left', defaultDirection: 'below', defaultAlignment: 'left' },
+    { id: 'top-center', defaultDirection: 'below', defaultAlignment: 'center' },
+    { id: 'top-right', defaultDirection: 'below', defaultAlignment: 'right' },
+    { id: 'middle-left', defaultDirection: 'right', defaultAlignment: 'center' },
+    { id: 'middle-right', defaultDirection: 'left', defaultAlignment: 'center' },
+    { id: 'bottom-left', defaultDirection: 'above', defaultAlignment: 'left' },
+    { id: 'bottom-center', defaultDirection: 'above', defaultAlignment: 'center' },
+    { id: 'bottom-right', defaultDirection: 'above', defaultAlignment: 'right' }
+  ];
+  var menuPlaygroundInstances = {};
+
+  function getMenuPlaygroundControls() {
+    return {
+      type: $('#menu-playground-type').val(),
+      direction: $('#menu-playground-direction').val(),
+      alignment: $('#menu-playground-alignment').val()
+    };
+  }
+
+  function resolvePlaygroundDefaultAlignment(slot, direction) {
+    if (slot.id === 'middle-left' && (direction === 'above' || direction === 'below')) {
+      return 'left';
+    }
+    if (slot.id === 'middle-right' && (direction === 'above' || direction === 'below')) {
+      return 'right';
+    }
+    return slot.defaultAlignment;
+  }
+
+  function resolveMenuPlaygroundOptions(slot, controls) {
+    var options = {
       behavior: { closeDelay: 0 },
       items: menuDemoItems
+    };
+
+    options.orientation = controls.type === 'horizontal' ? 'horizontal' : 'vertical';
+
+    options.direction =
+      controls.direction === 'default' ? slot.defaultDirection : controls.direction;
+    options.alignment =
+      controls.alignment === 'default'
+        ? resolvePlaygroundDefaultAlignment(slot, options.direction)
+        : controls.alignment;
+
+    if (options.orientation === 'vertical') {
+      if (slot.id === 'middle-left') {
+        options.textAlign = 'left';
+      } else if (slot.id === 'middle-right') {
+        options.textAlign = 'right';
+      }
+    }
+
+    return options;
+  }
+
+  function rebuildMenuPlayground() {
+    var controls = getMenuPlaygroundControls();
+    var $arena = $('#menu-placement-arena');
+
+    menuPlaygroundSlots.forEach(function (slot) {
+      var $mount = $arena.find('[data-slot="' + slot.id + '"]');
+      if (menuPlaygroundInstances[slot.id]) {
+        menuPlaygroundInstances[slot.id].destroy();
+      }
+      var menu = new Menu(resolveMenuPlaygroundOptions(slot, controls));
+      menuPlaygroundInstances[slot.id] = menu;
+      $mount.empty().append(menu.init());
     });
-    $(mount).append(menu.init());
-  });
+  }
+
+  $('#menu-playground-type, #menu-playground-direction, #menu-playground-alignment').on(
+    'change',
+    rebuildMenuPlayground
+  );
+  rebuildMenuPlayground();
 });

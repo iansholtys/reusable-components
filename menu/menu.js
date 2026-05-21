@@ -1,10 +1,12 @@
 /**
- * Menu Component - A vertical list of clickable items.
+ * Menu Component - A list of clickable items.
  *
  * Pass `items` (each with `text`; optional `onClick`).
  * Toggle menus use `buttonLabel` for the control (default ⋮; `''` for an empty button).
- * Placement comes from `preset` (`top-left`, `bottom-center`, etc.).
- * Text alignment comes from `textAlign` or preset alignment.
+ * `orientation` is `'vertical'` (default) or `'horizontal'`.
+ * `direction` is where the menu opens (`below`, `above`, `left`, `right`); default `below`.
+ * `alignment` can be `left`|`center`|`right` when above/below, or `top`|`center`|`bottom` when left/right.
+ * `textAlign` overrides inferred item text alignment when omitted.
  *
  * `behavior` is optional and controls interactivity.
  */
@@ -12,8 +14,10 @@ class Menu {
   /**
    * @param {Object} [options={}]
    * @param {string} [options.id] Root element `id`; random id if omitted.
-   * @param {string} [options.preset='top-left'] Placement preset (`top-left`, `top-center`, etc.).
-   * @param {'left'|'center'|'right'} [options.textAlign] Item text alignment; overrides preset alignment.
+   * @param {'above'|'below'|'left'|'right'} [options.direction='below'] Where the menu opens relative to the button.
+   * @param {'left'|'center'|'right'|'top'|'bottom'} [options.alignment] Menu alignment on the axis perpendicular to `direction`.
+   * @param {'left'|'center'|'right'} [options.textAlign] Item text alignment; inferred when omitted.
+   * @param {'vertical'|'horizontal'} [options.orientation='vertical'] How items are laid out in the list.
    * @param {Object} [options.behavior] Open/close behavior.
    * @param {'always'|'toggle'} [options.behavior.open] Defaults to `toggle`.
    * @param {number} [options.behavior.closeDelay] Integer ms before close on leave; defaults to `300`.
@@ -39,20 +43,20 @@ class Menu {
 
     this.isToggle = this.behavior.open === 'toggle';
 
-    // Validate and normalize preset
-    const { preset, textAlign } = options;
-    const [placement, align] = String(preset || 'top-left').toLowerCase().split('-');
-    this.placement = ['top', 'bottom'].includes(placement) ? placement : 'top';
-    this.align = ['left', 'center', 'right'].includes(align) ? align : 'left';
-    this.textAlign = ['left', 'center', 'right'].includes(textAlign) ? textAlign : this.align;
+    // Validate and normalize direction, alignment and orientation
+    const { direction, alignment, orientation, textAlign, buttonLabel, classes } = options;
+    this.orientation = ['vertical', 'horizontal'].includes(orientation) ? orientation : 'vertical';
+    this.direction = ['above', 'below', 'left', 'right'].includes(direction) ? direction : 'below';
+    this.alignment = this.normalizeAlignment(alignment);
+    this.textAlign = ['left', 'center', 'right'].includes(textAlign) ? textAlign : this.resolveTextAlign();
 
     // Validate and normalize button label
-    this.hasCustomButtonLabel = typeof options.buttonLabel === 'string';
-    this.buttonLabel = this.hasCustomButtonLabel ? options.buttonLabel : '\u22EE';
+    this.hasCustomButtonLabel = typeof buttonLabel === 'string';
+    this.buttonLabel = this.hasCustomButtonLabel ? buttonLabel : '\u22EE';
 
     // Validate and normalize items
     this.items = options.items || [];
-    this.classes = Array.isArray(options.classes) ? options.classes : [];
+    this.classes = Array.isArray(classes) ? classes : [];
 
     this.isOpen = false;
     this.isPinned = false;
@@ -67,9 +71,9 @@ class Menu {
   build() {
     const rootClasses = [
       'menu-component',
-      'menu-component--vertical',
-      'menu-component--placement-' + this.placement,
-      'menu-component--align-' + this.align,
+      'menu-component--' + this.orientation,
+      'menu-component--direction-' + this.direction,
+      'menu-component--align-' + this.alignment,
       'menu-component--text-' + this.textAlign,
       ...this.classes
     ];
@@ -255,6 +259,36 @@ class Menu {
     $(document).off(this.keyNamespace);
     this.elements.$root?.off().remove();
     this.elements = {};
+  }
+
+  /**
+   * Menu alignment valid for {@link Menu#direction}.
+   * @param {string} [alignment] Requested alignment; default values are used if invalid for the current direction.
+   * @returns {'left'|'center'|'right'|'top'|'bottom'}
+   */
+  normalizeAlignment(alignment) {
+    if (['below', 'above'].includes(this.direction)) {
+      return ['left', 'center', 'right'].includes(alignment) ? alignment : 'left';
+    }
+    return ['top', 'center', 'bottom'].includes(alignment) ? alignment : 'center';
+  }
+
+  /**
+   * Infers item `textAlign` when one is not provided.
+   * @returns {'left'|'center'|'right'}
+   */
+  resolveTextAlign() {
+    const { orientation, direction, alignment } = this;
+    if (orientation === 'horizontal') {
+      return 'left';
+    }
+    if (['below', 'above'].includes(direction)) {
+      return alignment;
+    }
+    if (alignment === 'center') {
+      return 'center';
+    }
+    return direction === 'left' ? 'right' : 'left';
   }
 
   /**

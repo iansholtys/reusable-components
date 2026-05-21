@@ -36,7 +36,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  min-width: var(--menu-list-min-width);
   border: 1px solid var(--menu-border);
   border-radius: var(--menu-radius);
   background-color: var(--menu-bg);
@@ -44,7 +43,6 @@
 }
 .menu-component .menu-item {
   display: block;
-  width: 100%;
   box-sizing: border-box;
   padding: var(--menu-item-padding);
   font-size: var(--menu-item-font-size);
@@ -53,6 +51,8 @@
   border-radius: 0;
   background-color: transparent;
   color: var(--menu-text);
+  text-wrap: var(--menu-item-text-wrap);
+  white-space: var(--menu-item-text-wrap);
 }
 .menu-component .menu-item:hover, .menu-component .menu-item:focus-visible {
   background-color: var(--menu-item-hover-bg);
@@ -61,59 +61,103 @@
 .menu-component .menu-item:active {
   background-color: var(--menu-item-active-bg);
 }
-
-.menu-component--toggle .menu-list {
-  position: absolute;
-  z-index: var(--menu-z-index);
-  box-shadow: var(--menu-shadow);
-}
-
-.menu-component--placement-top::after,
-.menu-component--placement-bottom::before {
+.menu-component--direction-below::after, .menu-component--direction-above::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   height: var(--menu-offset);
 }
-
-.menu-component--placement-top::after {
+.menu-component--direction-below::after {
   top: 100%;
 }
-
-.menu-component--placement-bottom::before {
+.menu-component--direction-above::before {
   bottom: 100%;
 }
-
-.menu-component--placement-top .menu-list {
+.menu-component--direction-right::after, .menu-component--direction-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--menu-offset);
+}
+.menu-component--direction-right::after {
+  left: 100%;
+}
+.menu-component--direction-left::before {
+  right: 100%;
+}
+.menu-component--vertical .menu-list {
+  min-width: var(--menu-list-min-width);
+}
+.menu-component--horizontal .menu-list {
+  display: flex;
+  flex-direction: row;
+  min-width: auto;
+  width: max-content;
+}
+.menu-component--toggle .menu-list {
+  position: absolute;
+  z-index: var(--menu-z-index);
+  box-shadow: var(--menu-shadow);
+}
+.menu-component--direction-below .menu-list {
   top: calc(100% + var(--menu-offset));
   bottom: auto;
   margin: 0;
 }
-.menu-component--placement-bottom .menu-list {
+.menu-component--direction-above .menu-list {
   top: auto;
   bottom: calc(100% + var(--menu-offset));
   margin: 0;
 }
-.menu-component--align-left .menu-list {
+.menu-component--direction-right .menu-list {
+  left: calc(100% + var(--menu-offset));
+  right: auto;
+  margin: 0;
+}
+.menu-component--direction-left .menu-list {
+  left: auto;
+  right: calc(100% + var(--menu-offset));
+  margin: 0;
+}
+.menu-component--direction-below.menu-component--align-left .menu-list, .menu-component--direction-above.menu-component--align-left .menu-list {
   left: 0;
   right: auto;
   transform: none;
 }
-.menu-component--align-right .menu-list {
+.menu-component--direction-below.menu-component--align-right .menu-list, .menu-component--direction-above.menu-component--align-right .menu-list {
   left: auto;
   right: 0;
   transform: none;
 }
-.menu-component--align-center .menu-list {
+.menu-component--direction-below.menu-component--align-center .menu-list, .menu-component--direction-above.menu-component--align-center .menu-list {
   left: 50%;
   right: auto;
   transform: translateX(-50%);
+}
+.menu-component--direction-right.menu-component--align-top .menu-list, .menu-component--direction-left.menu-component--align-top .menu-list {
+  top: 0;
+  bottom: auto;
+  transform: none;
+}
+.menu-component--direction-right.menu-component--align-bottom .menu-list, .menu-component--direction-left.menu-component--align-bottom .menu-list {
+  top: auto;
+  bottom: 0;
+  transform: none;
+}
+.menu-component--direction-right.menu-component--align-center .menu-list, .menu-component--direction-left.menu-component--align-center .menu-list {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
 }
 .menu-component--always-open .menu-list {
   position: static;
   box-shadow: none;
   display: block;
+}
+.menu-component--always-open.menu-component--horizontal .menu-list, .menu-component--toggle.is-open.menu-component--horizontal .menu-list {
+  display: flex;
 }
 .menu-component--toggle:not(.is-open) .menu-list {
   display: none;
@@ -121,7 +165,15 @@
 .menu-component--toggle.is-open .menu-list {
   display: block;
 }
-
+.menu-component--horizontal .menu-item {
+  width: auto;
+}
+.menu-component--horizontal .menu-list > li:not(:last-child) .menu-item {
+  border-right: 1px solid var(--menu-border);
+}
+.menu-component--vertical .menu-item {
+  width: 100%;
+}
 .menu-component--text-left .menu-item {
   text-align: left;
 }
