@@ -154,9 +154,7 @@ class Menu {
     this.cancelScheduledClose();
     this.isOpen = true;
     this.elements.$root.addClass('is-open');
-    if (this.elements.$trigger) {
-      this.elements.$trigger.attr('aria-expanded', 'true');
-    }
+    this.elements.$trigger?.attr('aria-expanded', 'true');
   }
 
   /**
@@ -170,9 +168,7 @@ class Menu {
     this.isOpen = false;
     this.unpin();
     this.elements.$root.removeClass('is-open');
-    if (this.elements.$trigger) {
-      this.elements.$trigger.attr('aria-expanded', 'false');
-    }
+    this.elements.$trigger?.attr('aria-expanded', 'false');
   }
 
   /**
@@ -254,8 +250,10 @@ class Menu {
    */
   destroy() {
     this.cancelScheduledClose();
+    this.isOpen = false;
+    this.isPinned = false;
     $(document).off(this.keyNamespace);
-    this.elements?.$root.off().remove();
+    this.elements.$root?.off().remove();
     this.elements = {};
   }
 
