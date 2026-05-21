@@ -72,6 +72,15 @@
     }
   }
 
+  .menu-divider {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-top: 1px solid var(--menu-border);
+    height: 0;
+    pointer-events: none;
+  }
+
   // Invisible hover bridge across the offset gap (margin would break mouseenter).
   &--direction-below::after,
   &--direction-above::before {
@@ -196,7 +205,15 @@
       width: auto;
     }
     .menu-list > li:not(:last-child) .menu-item {
-      border-right: 1px solid var(--menu-border);
+      border-right: var(--menu-horizontal-item-border);
+    }
+    .menu-divider {
+      border: none;
+      border-left: 1px solid var(--menu-border);
+      width: 0;
+      height: auto;
+      align-self: stretch;
+      flex-shrink: 0;
     }
   }
   &--vertical .menu-item {

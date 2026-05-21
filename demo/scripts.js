@@ -264,9 +264,12 @@ $(function () {
   $('#app-mutable-true').append(tableLive.init());
   syncMutableJsonTrue();
 
-  const menuDemoItems = ['Profile', 'Settings', 'Sign out'].map(function (label) {
-    return { text: label, onClick: () => AlertModal.show(label + ' selected.', 'Menu') };
-  });
+  const menuDemoItems = [
+    { text: 'Profile', onClick: () => AlertModal.show('Profile selected.', 'Menu') },
+    { text: 'Settings', onClick: () => AlertModal.show('Settings selected.', 'Menu') },
+    { type: 'divider' },
+    { text: 'Sign out', onClick: () => AlertModal.show('Sign out selected.', 'Menu') }
+  ];
 
   var menuAlways = new Menu({
     behavior: { open: 'always' },

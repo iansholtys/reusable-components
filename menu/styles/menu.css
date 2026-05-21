@@ -61,6 +61,14 @@
 .menu-component .menu-item:active {
   background-color: var(--menu-item-active-bg);
 }
+.menu-component .menu-divider {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-top: 1px solid var(--menu-border);
+  height: 0;
+  pointer-events: none;
+}
 .menu-component--direction-below::after, .menu-component--direction-above::before {
   content: "";
   position: absolute;
@@ -169,7 +177,15 @@
   width: auto;
 }
 .menu-component--horizontal .menu-list > li:not(:last-child) .menu-item {
-  border-right: 1px solid var(--menu-border);
+  border-right: var(--menu-horizontal-item-border);
+}
+.menu-component--horizontal .menu-divider {
+  border: none;
+  border-left: 1px solid var(--menu-border);
+  width: 0;
+  height: auto;
+  align-self: stretch;
+  flex-shrink: 0;
 }
 .menu-component--vertical .menu-item {
   width: 100%;

@@ -1,7 +1,7 @@
 /**
  * Menu Component - A list of clickable items.
  *
- * Pass `items` (each with `text`; optional `onClick`).
+ * Pass `items` (each with `text`; optional `onClick`). Use `{ type: 'divider' }` for a visual break.
  * Toggle menus use `buttonLabel` for the control (default ⋮; `''` for an empty button).
  * `orientation` is `'vertical'` (default) or `'horizontal'`.
  * `direction` is where the menu opens (`below`, `above`, `left`, `right`); default `below`.
@@ -24,7 +24,7 @@ class Menu {
    * @param {boolean} [options.behavior.closeOnItemClick] Defaults to `true`.
    * @param {boolean} [options.behavior.defaultOpen] Toggle menus start open when `true`; defaults to `false`.
    * @param {string} [options.buttonLabel] Toggle button HTML/text. Defaults to `⋮`, can be empty.
-   * @param {Array<{ text: string, onClick?: (event: JQuery.Event) => void }>} [options.items=[]]
+   * @param {Array<{ text?: string, type?: string, onClick?: (event: JQuery.Event) => void }>} [options.items=[]]
    * @param {string[]} [options.classes=[]] Extra classes on `.menu-component`.
    */
   constructor(options = {}) {
@@ -118,6 +118,15 @@ class Menu {
 
     const self = this;
     this.items.forEach((item) => {
+      if (item.type === 'divider') {
+        this.elements.$list.append($('<li>', {
+          role: 'separator',
+          class: 'menu-divider',
+          'aria-hidden': 'true'
+        }));
+        return;
+      }
+
       const $btn = $('<button>', {
         type: 'button',
         role: 'menuitem',
