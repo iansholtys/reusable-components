@@ -297,7 +297,8 @@ $(function () {
     return {
       type: $('#menu-playground-type').val(),
       direction: $('#menu-playground-direction').val(),
-      alignment: $('#menu-playground-alignment').val()
+      alignment: $('#menu-playground-alignment').val(),
+      defaultOpen: $('#menu-playground-default-open').val() === 'open'
     };
   }
 
@@ -313,7 +314,10 @@ $(function () {
 
   function resolveMenuPlaygroundOptions(slot, controls) {
     var options = {
-      behavior: { closeDelay: 0 },
+      behavior: {
+        closeDelay: 0,
+        defaultOpen: controls.defaultOpen
+      },
       items: menuDemoItems
     };
 
@@ -352,9 +356,7 @@ $(function () {
     });
   }
 
-  $('#menu-playground-type, #menu-playground-direction, #menu-playground-alignment').on(
-    'change',
-    rebuildMenuPlayground
-  );
+  $('#menu-playground-type, #menu-playground-direction, #menu-playground-alignment, #menu-playground-default-open')
+    .on('change', rebuildMenuPlayground);
   rebuildMenuPlayground();
 });

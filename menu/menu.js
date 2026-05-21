@@ -22,6 +22,7 @@ class Menu {
    * @param {'always'|'toggle'} [options.behavior.open] Defaults to `toggle`.
    * @param {number} [options.behavior.closeDelay] Integer ms before close on leave; defaults to `300`.
    * @param {boolean} [options.behavior.closeOnItemClick] Defaults to `true`.
+   * @param {boolean} [options.behavior.defaultOpen] Toggle menus start open when `true`; defaults to `false`.
    * @param {string} [options.buttonLabel] Toggle button HTML/text. Defaults to `⋮`, can be empty.
    * @param {Array<{ text: string, onClick?: (event: JQuery.Event) => void }>} [options.items=[]]
    * @param {string[]} [options.classes=[]] Extra classes on `.menu-component`.
@@ -39,6 +40,9 @@ class Menu {
     }
     if (typeof this.behavior.closeOnItemClick !== 'boolean') {
       this.behavior.closeOnItemClick = true;
+    }
+    if (typeof this.behavior.defaultOpen !== 'boolean') {
+      this.behavior.defaultOpen = false;
     }
 
     this.isToggle = this.behavior.open === 'toggle';
@@ -145,6 +149,9 @@ class Menu {
   init() {
     const $root = this.build();
     this.bindEvents();
+    if (this.isToggle && this.behavior.defaultOpen) {
+      this.open();
+    }
     return $root;
   }
 
