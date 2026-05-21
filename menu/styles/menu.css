@@ -1,0 +1,135 @@
+.menu-component {
+  position: relative;
+  display: inline-block;
+  color: var(--menu-text);
+}
+.menu-component .menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--menu-trigger-size);
+  min-height: var(--menu-trigger-size);
+  padding: 0;
+  font-size: var(--menu-trigger-font-size);
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid var(--menu-trigger-border);
+  border-radius: var(--menu-radius);
+  background-color: var(--menu-trigger-bg);
+  color: var(--menu-text);
+}
+.menu-component .menu-trigger:hover {
+  background-color: var(--menu-trigger-hover-bg);
+}
+.menu-component .menu-trigger:focus-visible {
+  outline: 2px solid var(--menu-text-muted);
+  outline-offset: 2px;
+}
+.menu-component .menu-trigger--labeled {
+  min-width: auto;
+  width: auto;
+  padding: var(--menu-trigger-label-padding);
+  font-size: var(--menu-trigger-label-font-size);
+  white-space: nowrap;
+}
+.menu-component .menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: var(--menu-list-min-width);
+  border: 1px solid var(--menu-border);
+  border-radius: var(--menu-radius);
+  background-color: var(--menu-bg);
+  overflow: hidden;
+}
+.menu-component .menu-item {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--menu-item-padding);
+  font-size: var(--menu-item-font-size);
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--menu-text);
+}
+.menu-component .menu-item:hover, .menu-component .menu-item:focus-visible {
+  background-color: var(--menu-item-hover-bg);
+  outline: none;
+}
+.menu-component .menu-item:active {
+  background-color: var(--menu-item-active-bg);
+}
+
+.menu-component--toggle .menu-list {
+  position: absolute;
+  z-index: var(--menu-z-index);
+  box-shadow: var(--menu-shadow);
+}
+
+.menu-component--placement-top::after,
+.menu-component--placement-bottom::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--menu-offset);
+}
+
+.menu-component--placement-top::after {
+  top: 100%;
+}
+
+.menu-component--placement-bottom::before {
+  bottom: 100%;
+}
+
+.menu-component--placement-top .menu-list {
+  top: calc(100% + var(--menu-offset));
+  bottom: auto;
+  margin: 0;
+}
+.menu-component--placement-bottom .menu-list {
+  top: auto;
+  bottom: calc(100% + var(--menu-offset));
+  margin: 0;
+}
+.menu-component--align-left .menu-list {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+.menu-component--align-right .menu-list {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+.menu-component--align-center .menu-list {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+.menu-component--always-open .menu-list {
+  position: static;
+  box-shadow: none;
+  display: block;
+}
+.menu-component--toggle:not(.is-open) .menu-list {
+  display: none;
+}
+.menu-component--toggle.is-open .menu-list {
+  display: block;
+}
+
+.menu-component--text-left .menu-item {
+  text-align: left;
+}
+.menu-component--text-center .menu-item {
+  text-align: center;
+}
+.menu-component--text-right .menu-item {
+  text-align: right;
+}
+
+/*# sourceMappingURL=menu.css.map */

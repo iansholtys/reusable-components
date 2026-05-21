@@ -263,4 +263,34 @@ $(function () {
 
   $('#app-mutable-true').append(tableLive.init());
   syncMutableJsonTrue();
+
+  const menuDemoItems = ['Profile', 'Settings', 'Sign out'].map(function (label) {
+    return { text: label, onClick: () => AlertModal.show(label + ' selected.', 'Menu') };
+  });
+
+  var menuAlways = new Menu({
+    behavior: { open: 'always' },
+    items: menuDemoItems
+  });
+  $('#app-menu-always').append(menuAlways.init());
+
+  var menuToggle = new Menu({
+    behavior: { closeDelay: 400 },
+    items: menuDemoItems
+  });
+  $('#app-menu-toggle').append(menuToggle.init());
+
+  [
+    { preset: 'top-left', buttonLabel: 'Left Aligned', mount: '#app-menu-align-left' },
+    { preset: 'top-center', buttonLabel: 'Center Aligned', mount: '#app-menu-align-center' },
+    { preset: 'top-right', buttonLabel: 'Right Aligned', mount: '#app-menu-align-right' }
+  ].forEach(function ({ preset, buttonLabel, mount }) {
+    var menu = new Menu({
+      preset,
+      buttonLabel,
+      behavior: { closeDelay: 0 },
+      items: menuDemoItems
+    });
+    $(mount).append(menu.init());
+  });
 });

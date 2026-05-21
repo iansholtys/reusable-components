@@ -1,0 +1,50 @@
+.menu-component {
+  --menu-bg: #fff;
+  --menu-border: #e5e5e5;
+  --menu-radius: 0.5rem;
+  --menu-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --menu-text: #1a1a1a;
+  --menu-text-muted: #666;
+  --menu-item-padding: 0.5rem 1rem;
+  --menu-item-font-size: 0.9rem;
+  --menu-item-hover-bg: #f0f0f0;
+  --menu-item-active-bg: #e4e4e4;
+  --menu-list-min-width: 10rem;
+  --menu-trigger-size: 2rem;
+  --menu-trigger-font-size: 1.25rem;
+  --menu-trigger-label-font-size: 0.875rem;
+  --menu-trigger-label-padding: 0.375rem 0.75rem;
+  --menu-trigger-bg: #fff;
+  --menu-trigger-border: #e5e5e5;
+  --menu-trigger-hover-bg: #f5f5f5;
+  --menu-z-index: 20;
+  --menu-offset: 5px;
+}
+
+html[data-theme=dark] .menu-component {
+  --menu-bg: #1e1e1e;
+  --menu-border: #3d3d3d;
+  --menu-text: #f0f0f0;
+  --menu-text-muted: #a0a0a0;
+  --menu-item-hover-bg: #333;
+  --menu-item-active-bg: #3d3d3d;
+  --menu-trigger-bg: #1e1e1e;
+  --menu-trigger-border: #3d3d3d;
+  --menu-trigger-hover-bg: #2a2a2a;
+  --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme=auto] .menu-component {
+    --menu-bg: #1e1e1e;
+    --menu-border: #3d3d3d;
+    --menu-text: #f0f0f0;
+    --menu-text-muted: #a0a0a0;
+    --menu-item-hover-bg: #333;
+    --menu-item-active-bg: #3d3d3d;
+    --menu-trigger-bg: #1e1e1e;
+    --menu-trigger-border: #3d3d3d;
+    --menu-trigger-hover-bg: #2a2a2a;
+    --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  }
+}

@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../table/styles/table.css">
   <link rel="stylesheet" href="styles/modal-vars.css">
   <link rel="stylesheet" href="../modal/styles/modal.css">
+  <link rel="stylesheet" href="styles/menu-vars.css">
+  <link rel="stylesheet" href="../menu/styles/menu.css">
   <link rel="stylesheet" href="styles/demo.css">
 </head>
 <body>
@@ -19,6 +21,34 @@
   </div>
 
   <h1>Reusable components</h1>
+
+  <section aria-labelledby="heading-menus">
+    <h2 id="heading-menus">Menu component</h2>
+    <p class="intro">
+      Vertical menus. <code>behavior.open: 'always'</code> keeps the list visible, <code>'toggle'</code> opens on hover and can be pinned open by clicking the button.
+    </p>
+
+    <h3 class="demo-subheading">Always open</h3>
+    <p class="intro">No menu button — the list is always shown.</p>
+    <div id="app-menu-always"></div>
+
+    <h3 class="demo-subheading">Toggle (hover + click)</h3>
+    <p class="intro">
+      Click the button to pin the menu open; click again unpins and closes.
+      Hovering over the button or panel holds it open until <code>closeDelay</code> ms after leaving.
+    </p>
+    <div id="app-menu-toggle"></div>
+
+    <h3 class="demo-subheading">Alignment presets</h3>
+    <p class="intro">
+      Menus can be aligned with the left, center, or right of the button.
+    </p>
+    <div class="menu-alignment-demo">
+      <div id="app-menu-align-left"></div>
+      <div id="app-menu-align-center"></div>
+      <div id="app-menu-align-right"></div>
+    </div>
+  </section>
 
   <section aria-labelledby="heading-modals">
     <h2 id="heading-modals">Modal component</h2>
@@ -100,6 +130,7 @@
   <script src="../modal/alertModal.js"></script>
   <script src="../modal/confirmModal.js"></script>
   <script src="../table/table.js"></script>
+  <script src="../menu/menu.js"></script>
   <script src="scripts.js"></script>
 </body>
 </html>

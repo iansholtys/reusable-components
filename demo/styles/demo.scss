@@ -197,3 +197,8 @@ section,
   border-radius: $demo-radius;
   border: 1px solid var(--mutable-json-border, #e4e4e7);
 }
+
+.menu-alignment-demo {
+  display: flex;
+  gap: 0.5rem;
+}

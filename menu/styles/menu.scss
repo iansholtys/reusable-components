@@ -1,0 +1,153 @@
+// Menu component. Load theme variables from _menu-vars.scss.
+
+.menu-component {
+  position: relative;
+  display: inline-block;
+  color: var(--menu-text);
+
+  .menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--menu-trigger-size);
+    min-height: var(--menu-trigger-size);
+    padding: 0;
+    font-size: var(--menu-trigger-font-size);
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid var(--menu-trigger-border);
+    border-radius: var(--menu-radius);
+    background-color: var(--menu-trigger-bg);
+    color: var(--menu-text);
+
+    &:hover {
+      background-color: var(--menu-trigger-hover-bg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--menu-text-muted);
+      outline-offset: 2px;
+    }
+
+    &--labeled {
+      min-width: auto;
+      width: auto;
+      padding: var(--menu-trigger-label-padding);
+      font-size: var(--menu-trigger-label-font-size);
+      white-space: nowrap;
+    }
+  }
+
+  .menu-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: var(--menu-list-min-width);
+    border: 1px solid var(--menu-border);
+    border-radius: var(--menu-radius);
+    background-color: var(--menu-bg);
+    overflow: hidden;
+  }
+
+  .menu-item {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--menu-item-padding);
+    font-size: var(--menu-item-font-size);
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--menu-text);
+  
+    &:hover,
+    &:focus-visible {
+      background-color: var(--menu-item-hover-bg);
+      outline: none;
+    }
+  
+    &:active {
+      background-color: var(--menu-item-active-bg);
+    }
+  }
+}
+
+.menu-component--toggle {
+  .menu-list {
+    position: absolute;
+    z-index: var(--menu-z-index);
+    box-shadow: var(--menu-shadow);
+  }
+}
+
+// Invisible hover bridge across the offset gap (margin would break mouseenter).
+.menu-component--placement-top::after,
+.menu-component--placement-bottom::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--menu-offset);
+}
+
+.menu-component--placement-top::after {
+  top: 100%;
+}
+
+.menu-component--placement-bottom::before {
+  bottom: 100%;
+}
+
+.menu-list {
+  .menu-component--placement-top & {
+    top: calc(100% + var(--menu-offset));
+    bottom: auto;
+    margin: 0;
+  }
+  .menu-component--placement-bottom & {
+    top: auto;
+    bottom: calc(100% + var(--menu-offset));
+    margin: 0;
+  }
+
+  .menu-component--align-left & {
+    left: 0;
+    right: auto;
+    transform: none;
+  }
+  .menu-component--align-right & {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  .menu-component--align-center & {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .menu-component--always-open & {
+    position: static;
+    box-shadow: none;
+    display: block;
+  }
+  .menu-component--toggle:not(.is-open) & {
+    display: none;
+  }
+  .menu-component--toggle.is-open & {
+    display: block;
+  }
+}
+
+.menu-item {
+  .menu-component--text-left & {
+    text-align: left;
+  }
+  .menu-component--text-center & {
+    text-align: center;
+  }
+  .menu-component--text-right & {
+    text-align: right;
+  }
+}
