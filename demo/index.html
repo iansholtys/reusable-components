@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reusable components</title>
+  <link rel="stylesheet" href="styles/tabbed-region-vars.css">
+  <link rel="stylesheet" href="../tabbed-region/styles/tabbed-region.css">
   <link rel="stylesheet" href="styles/table-vars.css">
   <link rel="stylesheet" href="../table/styles/table.css">
   <link rel="stylesheet" href="styles/modal-vars.css">
@@ -21,157 +23,13 @@
   </div>
 
   <h1>Reusable components</h1>
-
-  <section aria-labelledby="heading-menus">
-    <h2 id="heading-menus">Menu component</h2>
-    <p class="intro">
-      Menus default to vertical layout; pass <code>orientation: 'horizontal'</code> for a row of items.
-      <code>behavior.open: 'always'</code> keeps the list visible, <code>'toggle'</code> opens on hover and can be pinned open by clicking the button.
-    </p>
-
-    <h3 class="demo-subheading">Always open</h3>
-    <p class="intro">
-      Two menus with item groups contents: one is closed by default, and the other is always open.
-    </p>
-    <div class="menu-always-demos">
-      <div id="app-menu-groups"></div>
-      <div id="app-menu-simple"></div>
-    </div>
-    <div id="app-menu-always-horizontal"></div>
-
-    <h3 class="demo-subheading">Direction and alignment</h3>
-    <p class="intro">
-      Toggleable menus can be configured to have different directions and alignments:
-    </p>
-    <ul>
-      <li><strong>Direction</strong> controls where the menu opens relative to the button.</li>
-      <li><strong>Alignment</strong> controls the alignment of the menu on the axis perpendicular to the direction.</li>
-    </ul>
-    <div class="menu-playground-controls" role="group" aria-label="Menu placement options">
-      <label class="menu-playground-control">
-        <span>Type</span>
-        <select id="menu-playground-type">
-          <option value="vertical" selected>Vertical</option>
-          <option value="horizontal">Horizontal</option>
-        </select>
-      </label>
-      <label class="menu-playground-control">
-        <span>Direction</span>
-        <select id="menu-playground-direction">
-          <option value="default" selected>Default</option>
-          <option value="above">Above</option>
-          <option value="below">Below</option>
-          <option value="left">Left</option>
-          <option value="right">Right</option>
-        </select>
-      </label>
-      <label class="menu-playground-control">
-        <span>Alignment</span>
-        <select id="menu-playground-alignment">
-          <option value="default" selected>Default</option>
-          <option value="left">Left</option>
-          <option value="center">Center</option>
-          <option value="right">Right</option>
-          <option value="top">Top</option>
-          <option value="bottom">Bottom</option>
-        </select>
-      </label>
-      <label class="menu-playground-control">
-        <span>Default state</span>
-        <select id="menu-playground-default-open">
-          <option value="closed" selected>Closed</option>
-          <option value="open">Open</option>
-        </select>
-      </label>
-    </div>
-    <div class="menu-placement-arena" id="menu-placement-arena" aria-label="Menu placement preview">
-      <div class="menu-placement-slot menu-placement-slot--top-left" data-slot="top-left"></div>
-      <div class="menu-placement-slot menu-placement-slot--top-center" data-slot="top-center"></div>
-      <div class="menu-placement-slot menu-placement-slot--top-right" data-slot="top-right"></div>
-      <div class="menu-placement-slot menu-placement-slot--middle-left" data-slot="middle-left"></div>
-      <div class="menu-placement-slot menu-placement-slot--middle-right" data-slot="middle-right"></div>
-      <div class="menu-placement-slot menu-placement-slot--bottom-left" data-slot="bottom-left"></div>
-      <div class="menu-placement-slot menu-placement-slot--bottom-center" data-slot="bottom-center"></div>
-      <div class="menu-placement-slot menu-placement-slot--bottom-right" data-slot="bottom-right"></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="heading-modals">
-    <h2 id="heading-modals">Modal component</h2>
-    <p class="intro">
-      Alert and confirm dialogs share one backdrop while open. Default motion: instant enter, slide-up exit.
-    </p>
-    <div class="demo-toolbar">
-      <button type="button" id="btn-modal-alert">Show alert</button>
-      <button type="button" id="btn-modal-confirm">Show confirm</button>
-    </div>
-
-    <h3 class="demo-subheading">Alert enter / exit presets</h3>
-    <p class="intro">
-      Each button uses the same preset for open and close (300ms). Dismiss the alert to see the exit animation.
-      The default alert above uses instant enter and slide-up exit only.
-    </p>
-    <div class="demo-toolbar" id="alert-animation-toolbar"></div>
-  </section>
-
-  <h2 id="heading-tables">Table component</h2>
   <p class="intro">
-    Demos of the <code>Table</code> component.
+    Each component demo lives in a tab below. Switch tabs to explore Menu, Modal, and Table.
   </p>
-
-  <section aria-labelledby="heading-ledger">
-    <h2 id="heading-ledger">Minimal table</h2>
-    <p class="intro">
-      A simple table displaying basic object data with no searching or filtering.
-    </p>
-    <div id="app-ledger"></div>
-  </section>
-
-  <section aria-labelledby="heading-search">
-    <h2 id="heading-search">Complex table</h2>
-    <p class="intro">
-      A table demonstrating more complex features:
-      <ul>
-        <li>Text search against <code>searchable: true</code> columns (SKU, category, status).</li>
-        <li>A custom field name so column headers can be customized separately from data property names.</li>
-        <li>Custom value, render and sort functions for the 'status' column to allow it to be driven by the 'quantity' column.</li>
-        <li>A custom filter UI element and function to allow filtering by status.</li>
-        <li>Action buttons to modify properties of each row to see re-rendering (including sorting and filtering).</li>
-        <li>A custom row click handler which logs data to the browser console.</li>
-        <li><code>defaultSort</code> so the table opens sorted by computed status.</li>
-      </ul>
-    </p>
-    <div class="demo-toolbar">
-      <button type="button" id="btn-restore">Restore sample data</button>
-      <button type="button" id="btn-clear">Clear table</button>
-    </div>
-    <div id="app-search"></div>
-  </section>
-
-  <section aria-labelledby="heading-mutable">
-    <h2 id="heading-mutable">Mutable tables</h2>
-    <p class="intro">
-      With <code>mutableData: false</code> (default), each row is shallow-cloned into the table's internal array.
-      With <code>mutableData: true</code>, object references remain intact, so changes can affect the original data.
-    </p>
-    <p class="intro">
-      Below is a live <code>JSON.stringify</code> of data passed into two Table components. Only the mutableData: true table should change when the "+1" button is clicked.
-    </p>
-    <div class="mutable-demo-grid">
-      <div class="mutable-demo-panel">
-        <h3><code>mutableData: false</code> — cloned row objects</h3>
-        <pre class="mutable-json" id="json-mutable-false" aria-live="polite"></pre>
-        <div id="app-mutable-false"></div>
-      </div>
-      <div class="mutable-demo-panel">
-        <h3><code>mutableData: true</code> — same row objects</h3>
-        <pre class="mutable-json" id="json-mutable-true" aria-live="polite"></pre>
-        <div id="app-mutable-true"></div>
-      </div>
-    </div>
-  </section>
+  <div id="app-demo-tabs"></div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../tabbed-region/tabbed-region.js"></script>
   <script src="../modal/modal.js"></script>
   <script src="../modal/alertModal.js"></script>
   <script src="../modal/confirmModal.js"></script>

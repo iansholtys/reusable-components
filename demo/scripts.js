@@ -1,3 +1,185 @@
+function buildMenuDemoPanel() {
+  return $('<div>').append(
+    $('<section>', { 'aria-labelledby': 'heading-menus' }).append(
+      $('<h2>', { id: 'heading-menus', text: 'Menu component' }),
+      $('<p>', { class: 'intro' }).append(
+        'Menus default to vertical layout; pass ',
+        $('<code>', { text: "orientation: 'horizontal'" }),
+        ' for a row of items. ',
+        $('<code>', { text: "behavior.open: 'always'" }),
+        ' keeps the list visible, ',
+        $('<code>', { text: "'toggle'" }),
+        ' opens on hover and can be pinned open by clicking the button.'
+      ),
+      $('<h3>', { class: 'demo-subheading', text: 'Always open' }),
+      $('<p>', {
+        class: 'intro',
+        text: 'Two menus with item groups contents: one is closed by default, and the other is always open.'
+      }),
+      $('<div>', { class: 'menu-always-demos' }).append(
+        $('<div>', { id: 'app-menu-groups' }),
+        $('<div>', { id: 'app-menu-simple' })
+      ),
+      $('<div>', { id: 'app-menu-always-horizontal' }),
+      $('<h3>', { class: 'demo-subheading', text: 'Direction and alignment' }),
+      $('<p>', {
+        class: 'intro',
+        text: 'Toggleable menus can be configured to have different directions and alignments:'
+      }),
+      $('<ul>').append(
+        $('<li>').html('<strong>Direction</strong> controls where the menu opens relative to the button.'),
+        $('<li>').html('<strong>Alignment</strong> controls the alignment of the menu on the axis perpendicular to the direction.')
+      ),
+      $('<div>', { class: 'menu-playground-controls', role: 'group', 'aria-label': 'Menu placement options' }).append(
+        $('<label>', { class: 'menu-playground-control' }).append(
+          $('<span>', { text: 'Type' }),
+          $('<select>', { id: 'menu-playground-type' }).append(
+            $('<option>', { value: 'vertical', text: 'Vertical', selected: true }),
+            $('<option>', { value: 'horizontal', text: 'Horizontal' })
+          )
+        ),
+        $('<label>', { class: 'menu-playground-control' }).append(
+          $('<span>', { text: 'Direction' }),
+          $('<select>', { id: 'menu-playground-direction' }).append(
+            $('<option>', { value: 'default', text: 'Default', selected: true }),
+            $('<option>', { value: 'above', text: 'Above' }),
+            $('<option>', { value: 'below', text: 'Below' }),
+            $('<option>', { value: 'left', text: 'Left' }),
+            $('<option>', { value: 'right', text: 'Right' })
+          )
+        ),
+        $('<label>', { class: 'menu-playground-control' }).append(
+          $('<span>', { text: 'Alignment' }),
+          $('<select>', { id: 'menu-playground-alignment' }).append(
+            $('<option>', { value: 'default', text: 'Default', selected: true }),
+            $('<option>', { value: 'left', text: 'Left' }),
+            $('<option>', { value: 'center', text: 'Center' }),
+            $('<option>', { value: 'right', text: 'Right' }),
+            $('<option>', { value: 'top', text: 'Top' }),
+            $('<option>', { value: 'bottom', text: 'Bottom' })
+          )
+        ),
+        $('<label>', { class: 'menu-playground-control' }).append(
+          $('<span>', { text: 'Default state' }),
+          $('<select>', { id: 'menu-playground-default-open' }).append(
+            $('<option>', { value: 'closed', text: 'Closed', selected: true }),
+            $('<option>', { value: 'open', text: 'Open' })
+          )
+        )
+      ),
+      $('<div>', { class: 'menu-placement-arena', id: 'menu-placement-arena', 'aria-label': 'Menu placement preview' }).append(
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--top-left', 'data-slot': 'top-left' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--top-center', 'data-slot': 'top-center' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--top-right', 'data-slot': 'top-right' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--middle-left', 'data-slot': 'middle-left' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--middle-right', 'data-slot': 'middle-right' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--bottom-left', 'data-slot': 'bottom-left' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--bottom-center', 'data-slot': 'bottom-center' }),
+        $('<div>', { class: 'menu-placement-slot menu-placement-slot--bottom-right', 'data-slot': 'bottom-right' })
+      )
+    )
+  );
+}
+
+function buildModalDemoPanel() {
+  return $('<div>').append(
+    $('<section>', { 'aria-labelledby': 'heading-modals' }).append(
+      $('<h2>', { id: 'heading-modals', text: 'Modal component' }),
+      $('<p>', {
+        class: 'intro',
+        text: 'Alert and confirm dialogs share one backdrop while open. Default motion: instant enter, slide-up exit.'
+      }),
+      $('<div>', { class: 'demo-toolbar' }).append(
+        $('<button>', { type: 'button', id: 'btn-modal-alert', text: 'Show alert' }),
+        $('<button>', { type: 'button', id: 'btn-modal-confirm', text: 'Show confirm' })
+      ),
+      $('<h3>', { class: 'demo-subheading', text: 'Alert enter / exit presets' }),
+      $('<p>', {
+        class: 'intro',
+        text: 'Each button uses the same preset for open and close (300ms). Dismiss the alert to see the exit animation. The default alert above uses instant enter and slide-up exit only.'
+      }),
+      $('<div>', { class: 'demo-toolbar', id: 'alert-animation-toolbar' })
+    )
+  );
+}
+
+function buildTableDemoPanel() {
+  return $('<div>').append(
+    $('<section>', { 'aria-labelledby': 'heading-tables' }).append(
+      $('<h2>', { id: 'heading-tables', text: 'Table component' }),
+      $('<p>', { class: 'intro' }).append(
+        'Demos of the ',
+        $('<code>', { text: 'Table' }),
+        ' component.'
+      )
+    ),
+    $('<section>', { 'aria-labelledby': 'heading-ledger' }).append(
+      $('<h2>', { id: 'heading-ledger', text: 'Minimal table' }),
+      $('<p>', {
+        class: 'intro',
+        text: 'A simple table displaying basic object data with no searching or filtering.'
+      }),
+      $('<div>', { id: 'app-ledger' })
+    ),
+    $('<section>', { 'aria-labelledby': 'heading-search' }).append(
+      $('<h2>', { id: 'heading-search', text: 'Complex table' }),
+      $('<p>', { class: 'intro', text: 'A table demonstrating more complex features:' }),
+      $('<ul>').append(
+        $('<li>').append(
+          'Text search against ',
+          $('<code>', { text: 'searchable: true' }),
+          ' columns (SKU, category, status).'
+        ),
+        $('<li>').append(
+          'A custom field name so column headers can be customized separately from data property names.'
+        ),
+        $('<li>').append(
+          "Custom value, render and sort functions for the 'status' column to allow it to be driven by the 'quantity' column."
+        ),
+        $('<li>').append('A custom filter UI element and function to allow filtering by status.'),
+        $('<li>').append('Action buttons to modify properties of each row to see re-rendering (including sorting and filtering).'),
+        $('<li>').append('A custom row click handler which logs data to the browser console.'),
+        $('<li>').append(
+          $('<code>', { text: 'defaultSort' }),
+          ' so the table opens sorted by computed status.'
+        )
+      ),
+      $('<div>', { class: 'demo-toolbar' }).append(
+        $('<button>', { type: 'button', id: 'btn-restore', text: 'Restore sample data' }),
+        $('<button>', { type: 'button', id: 'btn-clear', text: 'Clear table' })
+      ),
+      $('<div>', { id: 'app-search' })
+    ),
+    $('<section>', { 'aria-labelledby': 'heading-mutable' }).append(
+      $('<h2>', { id: 'heading-mutable', text: 'Mutable tables' }),
+      $('<p>', { class: 'intro' }).append(
+        'With ',
+        $('<code>', { text: 'mutableData: false' }),
+        " (default), each row is shallow-cloned into the table's internal array. With ",
+        $('<code>', { text: 'mutableData: true' }),
+        ', object references remain intact, so changes can affect the original data.'
+      ),
+      $('<p>', { class: 'intro' }).append(
+        'Below is a live ',
+        $('<code>', { text: 'JSON.stringify' }),
+        ' of data passed into two Table components. Only the mutableData: true table should change when the "+1" button is clicked.'
+      ),
+      $('<div>', { class: 'mutable-demo-grid' }).append(
+        $('<div>', { class: 'mutable-demo-panel' }).append(
+          $('<h3>').append($('<code>', { text: 'mutableData: false' }), ' — cloned row objects'),
+          $('<pre>', { class: 'mutable-json', id: 'json-mutable-false', 'aria-live': 'polite' }),
+          $('<div>', { id: 'app-mutable-false' })
+        ),
+        $('<div>', { class: 'mutable-demo-panel' }).append(
+          $('<h3>').append($('<code>', { text: 'mutableData: true' }), ' — same row objects'),
+          $('<pre>', { class: 'mutable-json', id: 'json-mutable-true', 'aria-live': 'polite' }),
+          $('<div>', { id: 'app-mutable-true' })
+        )
+      )
+    )
+  );
+}
+
 $(function () {
   var $root = $(document.documentElement);
   var themeModes = ['auto', 'light', 'dark'];
@@ -14,6 +196,13 @@ $(function () {
       setTheme(mode);
     });
   });
+
+  var demoTabs = new TabbedRegion({ ariaLabel: 'Component demos' });
+  demoTabs
+    .addTab('menu', 'Menu', buildMenuDemoPanel())
+    .addTab('modal', 'Modal', buildModalDemoPanel())
+    .addTab('table', 'Table', buildTableDemoPanel());
+  $('#app-demo-tabs').append(demoTabs.init());
 
   $('#btn-modal-alert').on('click', function () {
     AlertModal.show('Sample alert message for the demo.', 'Alert');
