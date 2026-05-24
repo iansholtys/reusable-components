@@ -63,7 +63,6 @@
     display: block;
     box-sizing: border-box;
     font-size: var(--menu-item-font-size);
-    cursor: pointer;
     border: none;
     border-radius: 0;
     background-color: transparent;
@@ -71,14 +70,23 @@
     text-wrap: var(--menu-item-text-wrap);
     white-space: var(--menu-item-text-wrap);
 
-    &:hover,
-    &:focus-visible {
-      background-color: var(--menu-item-hover-bg);
-      outline: none;
+    &:not(.menu-item--static) {
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--menu-item-hover-bg);
+        outline: none;
+      }
+
+      &:active {
+        background-color: var(--menu-item-active-bg);
+      }
     }
-  
-    &:active {
-      background-color: var(--menu-item-active-bg);
+
+    &--static {
+      cursor: default;
+      user-select: none;
     }
   }
 

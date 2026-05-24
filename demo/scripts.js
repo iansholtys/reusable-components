@@ -303,6 +303,8 @@ $(function () {
         { text: 'Release notes', onClick: () => AlertModal.show('Release notes selected.', 'Menu') }
       ]
     },
+    { type: 'divider' },
+    { text: 'Signed in as john@doe.com' },
     { text: 'Profile', onClick: () => AlertModal.show('Profile selected.', 'Menu') },
     { text: 'Sign out', onClick: () => AlertModal.show('Sign out selected.', 'Menu') }
   ];

@@ -1,7 +1,8 @@
 /**
  * Menu Component - A list of clickable items.
  *
- * Pass `items` (each with `text`; optional `onClick`). Use `{ type: 'divider' }` for a visual break.
+ * Pass `items` (each with `text`; optional `onClick` for clickable rows). Items without `onClick`
+ * are display-only (no hover, do not close the menu). Use `{ type: 'divider' }` for a visual break.
  * Use `{ type: 'group', items, parent?, behavior }` for inline sections (vertical only).
  * `parent` is optional; omit it for a flat always-open segment. Nested items indent via `--menu-depth` on each row.
  * Parented groups use `behavior.open`
@@ -329,25 +330,30 @@ class Menu {
    */
   renderLeaf(item, depth = 0) {
     const { text } = item;
-    const $btn = $('<button>', {
-      type: 'button',
-      role: 'menuitem',
-      class: 'menu-item',
-      text: text != null ? String(text) : ''
-    });
-    $btn.css('--menu-depth', depth);
-    if (typeof item.onClick === 'function' || this.behavior.closeOnItemClick) {
-      $btn.on('click', (e) => {
+    const label = text != null ? String(text) : '';
+    let $row;
+    if (typeof item.onClick === 'function') {
+      $row = $('<button>', {
+        type: 'button',
+        role: 'menuitem',
+        class: 'menu-item',
+        text: label
+      }).on('click', (e) => {
         e.stopPropagation();
-        if (typeof item.onClick === 'function') {
-          item.onClick(e);
-        }
+        item.onClick(e);
         if (this.behavior.closeOnItemClick) {
           this.close();
         }
       });
+    } else {
+      $row = $('<span>', {
+        class: 'menu-item menu-item--static',
+        text: label
+      });
     }
-    return $('<li>', { role: 'none' }).append($btn);
+
+    $row.css('--menu-depth', depth);
+    return $('<li>', { role: 'none' }).append($row);
   }
 
   /**

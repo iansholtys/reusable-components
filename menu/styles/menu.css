@@ -53,7 +53,6 @@
   display: block;
   box-sizing: border-box;
   font-size: var(--menu-item-font-size);
-  cursor: pointer;
   border: none;
   border-radius: 0;
   background-color: transparent;
@@ -61,12 +60,19 @@
   text-wrap: var(--menu-item-text-wrap);
   white-space: var(--menu-item-text-wrap);
 }
-.menu-component .menu-item:hover, .menu-component .menu-item:focus-visible {
+.menu-component .menu-item:not(.menu-item--static) {
+  cursor: pointer;
+}
+.menu-component .menu-item:not(.menu-item--static):hover, .menu-component .menu-item:not(.menu-item--static):focus-visible {
   background-color: var(--menu-item-hover-bg);
   outline: none;
 }
-.menu-component .menu-item:active {
+.menu-component .menu-item:not(.menu-item--static):active {
   background-color: var(--menu-item-active-bg);
+}
+.menu-component .menu-item--static {
+  cursor: default;
+  user-select: none;
 }
 .menu-component .menu-divider {
   margin: 0;
