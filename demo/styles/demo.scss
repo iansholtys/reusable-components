@@ -247,6 +247,13 @@ html[data-theme="dark"] .menu-placement-arena {
   }
 }
 
+.menu-always-demos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
 #app-menu-always-horizontal {
   margin-top: 0.75rem;
 }

@@ -219,6 +219,13 @@ html[data-theme=dark] .menu-placement-arena {
     border-color: #4a4a52;
   }
 }
+.menu-always-demos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
 #app-menu-always-horizontal {
   margin-top: 0.75rem;
 }

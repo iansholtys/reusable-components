@@ -2,6 +2,11 @@
  * Menu Component - A list of clickable items.
  *
  * Pass `items` (each with `text`; optional `onClick`). Use `{ type: 'divider' }` for a visual break.
+ * Use `{ type: 'group', items, parent?, behavior }` for inline sections (vertical only).
+ * `parent` is optional; omit it for a flat always-open segment. Nested items indent via `--menu-depth` on each row.
+ * Parented groups use `behavior.open`
+ * (`'toggle'` default, `'always'`) and `behavior.defaultOpen` on toggle groups. Parents do not use `onClick`.
+ * Set `behavior.dividers` to `true` on a group to draw section borders (CSS handles adjacent groups).
  * Toggle menus use `buttonLabel` for the control (default ⋮; `''` for an empty button).
  * `orientation` is `'vertical'` (default) or `'horizontal'`.
  * `direction` is where the menu opens (`below`, `above`, `left`, `right`); default `below`.
@@ -9,6 +14,7 @@
  * `textAlign` overrides inferred item text alignment when omitted.
  *
  * `behavior` is optional and controls interactivity.
+ * Groups in horizontal menus are not supported in v1.
  */
 class Menu {
   /**
@@ -24,7 +30,7 @@ class Menu {
    * @param {boolean} [options.behavior.closeOnItemClick] Defaults to `true`.
    * @param {boolean} [options.behavior.defaultOpen] Toggle menus start open when `true`; defaults to `false`.
    * @param {string} [options.buttonLabel] Toggle button HTML/text. Defaults to `⋮`, can be empty.
-   * @param {Array<{ text?: string, type?: string, onClick?: (event: JQuery.Event) => void }>} [options.items=[]]
+   * @param {Array<Object>} [options.items=[]] Leaf items, `{ type: 'divider' }`, or `{ type: 'group', items, parent?, behavior }`.
    * @param {string[]} [options.classes=[]] Extra classes on `.menu-component`.
    */
   constructor(options = {}) {
@@ -65,6 +71,7 @@ class Menu {
     this.isOpen = false;
     this.isPinned = false;
     this.closeTimer = null;
+    this._groupIdCounter = 0;
     this.elements = {};
   }
 
@@ -116,35 +123,12 @@ class Menu {
       role: 'menu'
     });
 
-    const self = this;
+    this._groupIdCounter = 0;
     this.items.forEach((item) => {
-      if (item.type === 'divider') {
-        this.elements.$list.append($('<li>', {
-          role: 'separator',
-          class: 'menu-divider',
-          'aria-hidden': 'true'
-        }));
-        return;
+      const $node = this.renderItem(item, 0);
+      if ($node) {
+        this.elements.$list.append($node);
       }
-
-      const $btn = $('<button>', {
-        type: 'button',
-        role: 'menuitem',
-        class: 'menu-item',
-        text: item.text != null ? String(item.text) : ''
-      });
-      if (typeof item.onClick === 'function' || this.behavior.closeOnItemClick) {
-        $btn.on('click', function (e) {
-          e.stopPropagation();
-          if (typeof item.onClick === 'function') {
-            item.onClick(e);
-          }
-          if (self.behavior.closeOnItemClick) {
-            self.close();
-          }
-        });
-      }
-      this.elements.$list.append($('<li>', { role: 'none' }).append($btn));
     });
 
     this.elements.$root.append(this.elements.$list);
@@ -305,6 +289,160 @@ class Menu {
       return 'center';
     }
     return direction === 'left' ? 'right' : 'left';
+  }
+
+  /**
+   * Render one menu entry as an `<li>` (or null if skipped).
+   * @param {Object} item
+   * @param {number} [depth=0] Indent depth for items (0 = flush with menu edge).
+   * @returns {jQuery|null}
+   */
+  renderItem(item, depth = 0) {
+    if (!item || typeof item !== 'object') {
+      return null;
+    }
+    switch (item.type) {
+      case 'divider':
+        return this.renderDivider();
+      case 'group':
+        return this.renderGroup(item, depth);
+      default:
+        return this.renderLeaf(item, depth);
+    }
+  }
+
+  /**
+   * @returns {jQuery}
+   */
+  renderDivider() {
+    return $('<li>', {
+      role: 'separator',
+      class: 'menu-divider',
+      'aria-hidden': 'true'
+    });
+  }
+
+  /**
+   * @param {Object} item
+   * @param {number} [depth=0]
+   * @returns {jQuery}
+   */
+  renderLeaf(item, depth = 0) {
+    const { text } = item;
+    const $btn = $('<button>', {
+      type: 'button',
+      role: 'menuitem',
+      class: 'menu-item',
+      text: text != null ? String(text) : ''
+    });
+    $btn.css('--menu-depth', depth);
+    if (typeof item.onClick === 'function' || this.behavior.closeOnItemClick) {
+      $btn.on('click', (e) => {
+        e.stopPropagation();
+        if (typeof item.onClick === 'function') {
+          item.onClick(e);
+        }
+        if (this.behavior.closeOnItemClick) {
+          this.close();
+        }
+      });
+    }
+    return $('<li>', { role: 'none' }).append($btn);
+  }
+
+  /**
+   * @param {Object} item Group item with `items`, optional `parent`, and optional `behavior`.
+   * @param {number} [depth=0]
+   * @returns {jQuery|null}
+   */
+  renderGroup(item, depth = 0) {
+    const { parent, items } = item;
+    if (!Array.isArray(items) || items.length === 0) {
+      return null;
+    }
+
+    const hasParent = parent != null && typeof parent === 'object';
+    const text = hasParent && parent.text != null ? String(parent.text) : '';
+    let { open, defaultOpen, dividers } = item.behavior || {};
+
+    if (!hasParent) {
+      open = 'always';
+      defaultOpen = true;
+    } else {
+      if (!['always', 'toggle'].includes(open)) {
+        open = 'toggle';
+      }
+      if (typeof defaultOpen !== 'boolean') {
+        defaultOpen = false;
+      }
+    }
+
+    const isToggleGroup = hasParent && open === 'toggle';
+    const childDepth = hasParent ? depth + 1 : depth;
+    const groupId = this.id + '-group-' + (++this._groupIdCounter);
+
+    const classes = ['menu-group'];
+    if (!hasParent) {
+      classes.push('menu-group--segment');
+    } else if (isToggleGroup) {
+      classes.push('menu-group--toggle');
+    } else {
+      classes.push('menu-group--always');
+    }
+    if (defaultOpen) {
+      classes.push('is-expanded');
+    }
+    if (dividers === true) {
+      classes.push('menu-group--divided');
+    }
+
+    const $li = $('<li>', {
+      class: classes.join(' '),
+      role: 'none'
+    });
+
+    if (isToggleGroup) {
+      const $parentBtn = $('<button>', {
+        type: 'button',
+        class: 'menu-item menu-group__parent',
+        'aria-expanded': defaultOpen ? 'true' : 'false',
+        'aria-controls': groupId
+      });
+      $parentBtn.css('--menu-depth', depth);
+      $parentBtn.append(
+        $('<span>', { class: 'menu-group__label', text }),
+        $('<span>', { class: 'menu-group__chevron', 'aria-hidden': 'true' })
+      );
+      $parentBtn.on('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const expanded = !$li.hasClass('is-expanded');
+        $li.toggleClass('is-expanded', expanded);
+        $parentBtn.attr('aria-expanded', expanded ? 'true' : 'false');
+      });
+      $li.append($parentBtn);
+    } else if (hasParent) {
+      const $header = $('<div>', {
+        class: 'menu-group__parent menu-group__parent--header',
+        text
+      });
+      $header.css('--menu-depth', depth);
+      $li.append($header);
+    }
+
+    const $childList = $('<ul>', {
+      id: groupId,
+      class: 'menu-group__list'
+    });
+
+    items.forEach((child) => {
+      const $child = this.renderItem(child, childDepth);
+      if ($child) {
+        $childList.append($child);
+      }
+    });
+    $li.append($childList);
+    return $li;
   }
 
   /**

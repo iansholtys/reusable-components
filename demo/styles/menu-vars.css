@@ -5,12 +5,17 @@
   --menu-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   --menu-text: #1a1a1a;
   --menu-text-muted: #666;
-  --menu-item-padding: 0.5rem 1rem;
+  --menu-item-padding-block: 0.5rem;
+  --menu-item-padding-inline: 1rem;
+  --menu-item-padding: var(--menu-item-padding-block) var(--menu-item-padding-inline);
   --menu-item-font-size: 0.9rem;
   --menu-item-hover-bg: #f0f0f0;
   --menu-item-active-bg: #e4e4e4;
   --menu-list-min-width: 0;
   --menu-item-text-wrap: nowrap;
+  --menu-group-indent: 1rem;
+  --menu-group-chevron-size: 0.5rem;
+  --menu-group-chevron-gap: 0.75rem;
   --menu-horizontal-item-border: none;
   --menu-button-size: 2rem;
   --menu-button-font-size: 1.25rem;

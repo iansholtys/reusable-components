@@ -271,11 +271,53 @@ $(function () {
     { text: 'Sign out', onClick: () => AlertModal.show('Sign out selected.', 'Menu') }
   ];
 
-  var menuAlways = new Menu({
+  const menuGroupsDemoItems = [
+    {
+      type: 'group',
+      parent: { text: 'Advanced' },
+      behavior: { open: 'toggle' },
+      items: [
+        { text: 'Export data', onClick: () => AlertModal.show('Export data selected.', 'Menu') },
+        { text: 'Import data', onClick: () => AlertModal.show('Import data selected.', 'Menu') },
+        {
+          type: 'group',
+          parent: { text: 'Danger zone' },
+          behavior: { open: 'toggle' },
+          items: [
+            { text: 'Reset cache', onClick: () => AlertModal.show('Reset cache selected.', 'Menu') },
+            { text: 'Delete account', onClick: () => AlertModal.show('Delete account selected.', 'Menu') }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const menuSimpleDemoItems = [
+    { text: 'Dashboard', onClick: () => AlertModal.show('Dashboard selected.', 'Menu') },
+    {
+      type: 'group',
+      parent: { text: 'Pinned' },
+      behavior: { open: 'always' },
+      items: [
+        { text: 'Documentation', onClick: () => AlertModal.show('Documentation selected.', 'Menu') },
+        { text: 'Release notes', onClick: () => AlertModal.show('Release notes selected.', 'Menu') }
+      ]
+    },
+    { text: 'Profile', onClick: () => AlertModal.show('Profile selected.', 'Menu') },
+    { text: 'Sign out', onClick: () => AlertModal.show('Sign out selected.', 'Menu') }
+  ];
+
+  var menuGroups = new Menu({
     behavior: { open: 'always' },
-    items: menuDemoItems
+    items: menuGroupsDemoItems
   });
-  $('#app-menu-always').append(menuAlways.init());
+  $('#app-menu-groups').append(menuGroups.init());
+
+  var menuSimple = new Menu({
+    behavior: { open: 'always' },
+    items: menuSimpleDemoItems
+  });
+  $('#app-menu-simple').append(menuSimple.init());
 
   var menuAlwaysHorizontal = new Menu({
     orientation: 'horizontal',
