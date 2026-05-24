@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Modal component. Load theme variables from _modal-vars.scss.
 
 // Transform presets: enter = from-state before .show, exit = to-state while .is-exiting
@@ -112,13 +114,13 @@ $modal-scale-presets: (
 
   @each $name, $pair in $modal-slide-presets {
     &[data-enter='#{$name}'] {
-      transform: map-get($pair, enter);
+      transform: map.get($pair, enter);
     }
   }
 
   @each $name, $pair in $modal-scale-presets {
     &[data-enter='#{$name}'] {
-      transform: scale(map-get($pair, enter));
+      transform: scale(map.get($pair, enter));
     }
   }
 }
@@ -131,14 +133,14 @@ $modal-scale-presets: (
 
   @each $name, $pair in $modal-slide-presets {
     &[data-exit='#{$name}'] {
-      transform: map-get($pair, exit);
+      transform: map.get($pair, exit);
       opacity: 0;
     }
   }
 
   @each $name, $pair in $modal-scale-presets {
     &[data-exit='#{$name}'] {
-      transform: scale(map-get($pair, exit));
+      transform: scale(map.get($pair, exit));
       opacity: 0;
     }
   }
