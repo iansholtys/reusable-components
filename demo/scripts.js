@@ -180,9 +180,35 @@ function buildTableDemoPanel() {
   );
 }
 
+function buildNotificationsDemoPanel() {
+  return $('<div>').append(
+    $('<section>', { 'aria-labelledby': 'heading-notifications' }).append(
+      $('<h2>', { id: 'heading-notifications', text: 'Notifications component' }),
+      $('<p>', { class: 'intro' }).append(
+        'Quick smoke-test controls for the starter notification styles and behavior.'
+      ),
+      $('<div>', { class: 'demo-toolbar', role: 'group', 'aria-label': 'Notification type demos' }).append(
+        $('<button>', { type: 'button', id: 'btn-notification-info', text: 'Info' }),
+        $('<button>', { type: 'button', id: 'btn-notification-success', text: 'Success' }),
+        $('<button>', { type: 'button', id: 'btn-notification-warning', text: 'Warning' }),
+        $('<button>', { type: 'button', id: 'btn-notification-error', text: 'Error' }),
+        $('<button>', { type: 'button', id: 'btn-notification-persistent', text: 'Persistent' }),
+        $('<button>', { type: 'button', id: 'btn-notification-clear', text: 'Clear all' })
+      ),
+      $('<p>', {
+        class: 'intro',
+        text: 'Type buttons auto-dismiss after 3s. Persistent stays open until clicked or manually cleared.'
+      })
+    )
+  );
+}
+
 $(function () {
   var $root = $(document.documentElement);
   var themeModes = ['auto', 'light', 'dark'];
+  window.services = window.services || {};
+  window.services.notifications = new Notifications();
+  $('body').append(window.services.notifications.init());
 
   function setTheme(mode) {
     $root.attr('data-theme', mode);
@@ -201,7 +227,8 @@ $(function () {
   demoTabs
     .addTab('menu', 'Menu', buildMenuDemoPanel())
     .addTab('modal', 'Modal', buildModalDemoPanel())
-    .addTab('table', 'Table', buildTableDemoPanel());
+    .addTab('table', 'Table', buildTableDemoPanel())
+    .addTab('notifications', 'Notifications', buildNotificationsDemoPanel());
   $('#app-demo-tabs').append(demoTabs.init());
 
   $('#btn-modal-alert').on('click', function () {
@@ -378,6 +405,30 @@ $(function () {
 
   $('#btn-clear').on('click', function () {
     tableSearch.clearData();
+  });
+
+  $('#btn-notification-info').on('click', function () {
+    window.services.notifications.info('Info: this is a test notification.');
+  });
+
+  $('#btn-notification-success').on('click', function () {
+    window.services.notifications.success('Success: action completed successfully.');
+  });
+
+  $('#btn-notification-warning').on('click', function () {
+    window.services.notifications.warning('Warning: please double-check your input.');
+  });
+
+  $('#btn-notification-error').on('click', function () {
+    window.services.notifications.error('Error: something went wrong.');
+  });
+
+  $('#btn-notification-persistent').on('click', function () {
+    window.services.notifications.info('Persistent notification (duration: 0).', { duration: 0 });
+  });
+
+  $('#btn-notification-clear').on('click', function () {
+    window.services.notifications.hideAll();
   });
 
   var hostFrozen = [{ label: 'One row', count: 0 }];
