@@ -2,13 +2,18 @@
  * Table Component - A reusable table with sorting and filtering capabilities.
  *
  * At minimum, provide `columns` and `data` arrays of objects.
- * If `data` objects have properties matching camelCase column titles,
- * cell values can be looked up and populated automatically.
- * A custom valueFunction can be provided to override this behavior.
+ * Each column needs a `title` (header label). Omit `field` to derive it from `title`
+ * as camelCase (e.g. "Display Name" → `displayName`). Set `field` when the row
+ * property name does not match that inference.
+ *
+ * Cell values default to `row[column.field]`. A `valueFunction(row, value)` can
+ * transform that (second argument is the raw value at `column.field`).
  *
  * By default, the cell value is displayed as a string,
  * however a custom renderFunction can be provided to override this behavior.
- * The renderFunction can insert HTML; callers should escape untrusted data.
+ * When renderFunction returns a string it is assigned with `.text()` (safe for untrusted data).
+ * Return a jQuery object for buttons and other markup, or set `renderHtml: true` on the column
+ * when the string is trusted HTML.
  *
  * Columns can be marked as sortable or searchable.
  * By default, the cell value is used for sorting and searching,
@@ -29,9 +34,11 @@
 class Table {
   /**
    * @param {Object} [options={}]
-   * @param {Array<Object>} [options.columns=[]] Column definitions: `title`; optional `field`; `sortable`;
-   *   `searchable`; `valueFunction`; `sortFunction`; `searchFunction`; `renderFunction`; `cellClass`; `headerClass`.
-   * @param {Array<Object>} [options.data=[]] Row objects; values are read from matching fields or `valueFunction`.
+   * @param {Array<Object>} [options.columns=[]] Column definitions: required `title`; optional `field`
+   *   (inferred from `title` when omitted); `sortable` (default true); `searchable` (default false);
+   *   `valueFunction(row, value)`; `sortFunction`; `searchFunction`; `renderFunction(value, row, column)`;
+   *   `renderHtml`; `cellClass`; `headerClass`.
+   * @param {Array<Object>} [options.data=[]] Row objects; values from `row[field]` or `valueFunction`.
    * @param {boolean} [options.mutableData=false] When true, row references are kept on load and `setData` instead of shallow clones.
    * @param {string} [options.id] Root element `id`; a random id is generated if omitted.
    * @param {string} [options.searchPlaceholder] Placeholder text for the search box when any column is searchable.
@@ -438,10 +445,11 @@ class Table {
    * @returns {*}
    */
   getFieldValue(item, column) {
+    const raw = item[column.field];
     if (column.valueFunction) {
-      return column.valueFunction(item);
+      return column.valueFunction(item, raw);
     }
-    return item[column.field];
+    return raw;
   }
 
   /**
@@ -510,7 +518,14 @@ class Table {
         }
 
         if (column.renderFunction) {
-          $cell.append(column.renderFunction(value, item, column));
+          const rendered = column.renderFunction(value, item, column);
+          if (rendered && typeof rendered === 'object' && rendered.jquery) {
+            $cell.append(rendered);
+          } else if (column.renderHtml === true) {
+            $cell.append(rendered !== undefined && rendered !== null ? rendered : '');
+          } else {
+            $cell.text(rendered !== undefined && rendered !== null ? rendered : '');
+          }
         } else {
           $cell.text(value !== undefined && value !== null ? value : '');
         }

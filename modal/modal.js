@@ -10,6 +10,9 @@
  * Set application-wide defaults once via `Modal.setDefaults({ ... })`, or per-class
  * via `AlertModal.setDefaults` / `ConfirmModal.setDefaults`. Options passed to a
  * specific constructor or `show()` call override those defaults for that modal only.
+ *
+ * Prefer jQuery `.text()` or `{ text: ... }` for dynamic copy. When building HTML strings,
+ * use `Modal.escapeHtml()` on any untrusted interpolated values.
  */
 class Modal {
   static backdropId = 'modal-shared-backdrop';
@@ -347,6 +350,30 @@ class Modal {
    * Called when the modal DOM is destroyed
    */
   onDestroy() {}
+
+  /**
+   * Escape text for safe inclusion in HTML strings (e.g. before `.html()`).
+   * @param {*} value
+   * @returns {string}
+   */
+  static escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => {
+      switch (character) {
+        case '&':
+          return '&amp;';
+        case '<':
+          return '&lt;';
+        case '>':
+          return '&gt;';
+        case '"':
+          return '&quot;';
+        case "'":
+          return '&#039;';
+        default:
+          return character;
+      }
+    });
+  }
 
   /**
    * @param {string} [prefix='modal']
