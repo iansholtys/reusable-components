@@ -32,17 +32,3 @@ html[data-theme=dark] .tabbed-region-component {
   --tabbed-region-tab-disabled-bg: #252525;
   --tabbed-region-tab-disabled-color: #666;
 }
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme=auto] .tabbed-region-component {
-    --tabbed-region-bg: #1e1e1e;
-    --tabbed-region-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-    --tabbed-region-tab-color: #a0a0a0;
-    --tabbed-region-tab-hover-bg: rgba(102, 126, 234, 0.15);
-    --tabbed-region-tab-hover-color: #8b9ef0;
-    --tabbed-region-tab-active-bg: #2a2a2a;
-    --tabbed-region-tab-active-color: #8b9ef0;
-    --tabbed-region-tab-disabled-bg: #252525;
-    --tabbed-region-tab-disabled-color: #666;
-  }
-}

@@ -44,18 +44,6 @@ html {
       color: $demo-text-dark;
     }
   }
-
-  &[data-theme="auto"] body {
-    @media (prefers-color-scheme: dark) {
-      background: $demo-bg-page-dark;
-      color: $demo-text-dark;
-    }
-
-    @media (prefers-color-scheme: light) {
-      background: $demo-bg-page-light;
-      color: $demo-text-light;
-    }
-  }
 }
 
 body {
@@ -238,13 +226,6 @@ $demo-playground-arena-border-dark: #4a4a52;
 html[data-theme="dark"] .menu-placement-arena {
   background: $demo-playground-arena-dark;
   border-color: $demo-playground-arena-border-dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme="auto"] .menu-placement-arena {
-    background: $demo-playground-arena-dark;
-    border-color: $demo-playground-arena-border-dark;
-  }
 }
 
 .menu-always-demos {

@@ -211,11 +211,17 @@ $(function () {
   $('body').append(window.services.notifications.init());
 
   function setTheme(mode) {
-    $root.attr('data-theme', mode);
+    let theme = ['dark', 'light'].includes(mode) ? mode : 'auto';
+    if (theme === 'auto') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    $root.attr('data-theme', theme);
     themeModes.forEach(function (themeMode) {
       $('#theme-' + themeMode).attr('aria-pressed', mode === themeMode ? 'true' : 'false');
     });
   }
+
+  setTheme('auto');
 
   themeModes.forEach(function (mode) {
     $('#theme-' + mode).on('click', function () {

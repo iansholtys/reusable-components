@@ -31,6 +31,7 @@ html[data-theme='dark'] .modal-backdrop {
   --modal-backdrop: rgba(0, 0, 0, 0.45);
 }
 
+// Host sets html[data-theme="light" | "dark"] (see theme/theme.js to resolve "auto").
 html[data-theme='dark'] .modal-layer {
   --modal-bg: #1e1e1e;
   --modal-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
@@ -44,25 +45,4 @@ html[data-theme='dark'] .modal-layer {
   --modal-btn-secondary-bg: #2a2a2a;
   --modal-btn-secondary-text: #f0f0f0;
   --modal-btn-secondary-border: #555;
-}
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme='auto'] .modal-backdrop {
-    --modal-backdrop: rgba(0, 0, 0, 0.45);
-  }
-
-  html[data-theme='auto'] .modal-layer {
-    --modal-bg: #1e1e1e;
-    --modal-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-    --modal-header-border: #3d3d3d;
-    --modal-header-bg: #2a2a2a;
-    --modal-text: #f0f0f0;
-    --modal-close: #a0a0a0;
-    --modal-close-hover: #f0f0f0;
-    --modal-btn-primary-bg: #2d7fd4;
-    --modal-btn-primary-text: #fff;
-    --modal-btn-secondary-bg: #2a2a2a;
-    --modal-btn-secondary-text: #f0f0f0;
-    --modal-btn-secondary-border: #555;
-  }
 }

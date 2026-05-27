@@ -11,7 +11,7 @@ Shared frontend UI pieces meant to be placed under a `components/reusable/` dire
 1. Create (if needed) and navigate to a project's `components/reusable` directory and run `git clone (repo) .`
 2. Run `npm install`
 3. Run `npm run build:css` for a one-time SASS compilation or `npm run watch:css` for a SASS watcher.
-4. In your application, add stylesheet and JS links for each components you want. Relative to the repo root, those are at `{name}/styles/{name}.css` and `{name}/{name}.js` respectively.
+4. In your application, add stylesheet and JS links for each component you want. Relative to the repo root, those are at `{name}/styles/{name}.css` and `{name}/{name}.js` respectively.
 5. To customize component styling, copy-paste the relevant `demo/styles/*-vars.css` files into the place you store custom CSS, add stylesheet links, and modify the values as needed. Alternately, if you use Sass, copy the relevant `{name}/styles/_{name}-vars.scss` files into the place monitoring for SASS/SCSS. Modify the duplicated `*-vars.scss` files, verify they compiled as expected, and add stylesheet links to them.
 
 ## CSS

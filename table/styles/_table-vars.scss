@@ -46,7 +46,6 @@
   --table-sort-icon-font-size: 0.75rem;
 }
 
-// Demo / host page can set html[data-theme="light" | "dark" | "auto"].
 html[data-theme="dark"] .table-component {
   --table-border: #3d3d3d;
   --table-bg-header: #2a2a2a;
@@ -55,16 +54,4 @@ html[data-theme="dark"] .table-component {
   --table-hover: #333;
   --table-hover-header: #363636;
   --table-card-bg: #1e1e1e;
-}
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme="auto"] .table-component {
-    --table-border: #3d3d3d;
-    --table-bg-header: #2a2a2a;
-    --table-text: #f0f0f0;
-    --table-text-muted: #a0a0a0;
-    --table-hover: #333;
-    --table-hover-header: #363636;
-    --table-card-bg: #1e1e1e;
-  }
 }

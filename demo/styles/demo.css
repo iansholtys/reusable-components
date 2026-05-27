@@ -11,18 +11,6 @@ html[data-theme=dark] body {
   background: #121212;
   color: #eee;
 }
-@media (prefers-color-scheme: dark) {
-  html[data-theme=auto] body {
-    background: #121212;
-    color: #eee;
-  }
-}
-@media (prefers-color-scheme: light) {
-  html[data-theme=auto] body {
-    background: #fafafa;
-    color: #1a1a1a;
-  }
-}
 
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -213,12 +201,6 @@ html[data-theme=dark] .menu-placement-arena {
   border-color: #4a4a52;
 }
 
-@media (prefers-color-scheme: dark) {
-  html[data-theme=auto] .menu-placement-arena {
-    background: #2a2a2e;
-    border-color: #4a4a52;
-  }
-}
 .menu-always-demos {
   display: flex;
   flex-wrap: wrap;

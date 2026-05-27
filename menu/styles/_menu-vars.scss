@@ -43,18 +43,3 @@ html[data-theme="dark"] .menu-component {
   --menu-button-hover-bg: #2a2a2a;
   --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme="auto"] .menu-component {
-    --menu-bg: #1e1e1e;
-    --menu-border: #3d3d3d;
-    --menu-text: #f0f0f0;
-    --menu-text-muted: #a0a0a0;
-    --menu-item-hover-bg: #333;
-    --menu-item-active-bg: #3d3d3d;
-    --menu-button-bg: #1e1e1e;
-    --menu-button-border: #3d3d3d;
-    --menu-button-hover-bg: #2a2a2a;
-    --menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-  }
-}
